@@ -41,7 +41,7 @@ public class PostmanEchoTest {
                         "data.productionYear", equalTo(request.getProductionYear()),
                         "data.color", equalTo(request.getColor()),
                         "data.stateSign", containsString("777"),
-                        "data.accidentYears", hasItems(2020));
+                        "data.accidentYears", hasItems(2021));
     }
 
     @Test
