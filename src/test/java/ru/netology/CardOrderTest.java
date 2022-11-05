@@ -40,6 +40,6 @@ public class CardOrderTest {
 
     @Test
     void shouldCreateOrder(){
-        driver.get("http://localhost:7777");
+        driver.get("http://localhost:9999");
     }
 }
