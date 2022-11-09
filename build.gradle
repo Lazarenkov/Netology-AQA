@@ -20,8 +20,8 @@ test {
     useJUnitPlatform()
 }
 
-compileJava.options.encoding = 'UTF-8'
+compileJava.options.encoding = 'windows-1251'
 
 tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+    options.encoding = 'windows-1251'
 }
