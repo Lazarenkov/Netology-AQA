@@ -32,7 +32,7 @@ public class CardOrderTest {
         options.addArguments("--headless");
         driver = new ChromeDriver(options); //TODO
 
-        driver.get("http://localhost:7777");
+        driver.get("http://localhost:9999");
     }
 
     @AfterEach
