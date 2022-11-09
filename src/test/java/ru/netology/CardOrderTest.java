@@ -110,17 +110,17 @@ public class CardOrderTest {
         Assertions.assertEquals(expected, actual);
     }
 
-//    @Test
-//    void shouldCreateOrderWhenValidNameWithYO() {//тест падает т.к. дефект - могут встречаться ФИО с буквой ё в паспорте
-//        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Фёдор Клёвый");
-//        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79029873631");
-//        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
-//        driver.findElement(By.cssSelector("button")).click();
-//        String actual = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
-//        String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-//        System.out.println(actual);
-//        Assertions.assertEquals(expected, actual);
-//    }
+    @Test
+    void shouldCreateOrderWhenValidNameWithYO() {//тест падает т.к. дефект - могут встречаться ФИО с буквой ё в паспорте
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Фёдор Клёвый");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79029873631");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.cssSelector("button")).click();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
+        String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
+        System.out.println(actual);
+        Assertions.assertEquals(expected, actual);
+    }
 
     @Test
     void shouldPrintPromptWhenInvalidEnglishName() {
@@ -146,29 +146,29 @@ public class CardOrderTest {
         Assertions.assertEquals(expected, actual);
     }
 
-//    @Test
-//    void shouldPrintPromptWhenInvalidNameOfOneWord() { //тест падает т.к. дефект - не может быть ФИО из одного слова в паспорте
-//        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Андрей");
-//        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79029873631");
-//        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
-//        driver.findElement(By.cssSelector("button")).click();
-//        String actual = driver.findElement(By.cssSelector("[data-test-id='name']")).findElement(By.className("input__sub")).getText().trim();
-//        String expected = "Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.";
-//        System.out.println(actual);
-//        Assertions.assertEquals(expected, actual);
-//    }
+    @Test
+    void shouldPrintPromptWhenInvalidNameOfOneWord() { //тест падает т.к. дефект - не может быть ФИО из одного слова в паспорте
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Андрей");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79029873631");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.cssSelector("button")).click();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='name']")).findElement(By.className("input__sub")).getText().trim();
+        String expected = "Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.";
+        System.out.println(actual);
+        Assertions.assertEquals(expected, actual);
+    }
 
-//    @Test
-//    void shouldPrintPromptWhenInvalidNameOfOneLetter() { //тест падает т.к. дефект - не может быть ФИО из одной буквы в паспорте
-//        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("А");
-//        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79029873631");
-//        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
-//        driver.findElement(By.cssSelector("button")).click();
-//        String actual = driver.findElement(By.cssSelector("[data-test-id='name']")).findElement(By.className("input__sub")).getText().trim();
-//        String expected = "Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.";
-//        System.out.println(actual);
-//        Assertions.assertEquals(expected, actual);
-//    }
+    @Test
+    void shouldPrintPromptWhenInvalidNameOfOneLetter() { //тест падает т.к. дефект - не может быть ФИО из одной буквы в паспорте
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("А");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79029873631");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.cssSelector("button")).click();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='name']")).findElement(By.className("input__sub")).getText().trim();
+        String expected = "Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.";
+        System.out.println(actual);
+        Assertions.assertEquals(expected, actual);
+    }
 
     @Test
     void shouldPrintPromptWhenInvalidNameOfOneChar() {
