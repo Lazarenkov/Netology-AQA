@@ -77,20 +77,20 @@ public class CardDeliveryNameTest {
         Assertions.assertTrue(msg.contains("Успешно!"));
     }
 
-//    @Test
-//    void shouldCreateOrderWhenValidNameWithYO() throws InterruptedException {
-//        $("[data-test-id='city'] [class='input__control']" ).setValue("Калуга");
-//        $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
-//        $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-//        $("[data-test-id='name'] [name='name']").setValue("Артём Артёмов");
-//        $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
-//        $("[class=checkbox__text]").click();
-//        $(By.className("button__text") ).click();
-//
-//        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(11));
-//        String msg = $("[data-test-id=notification]").getText();
-//        Assertions.assertTrue(msg.contains("Успешно!"));
-//    }
+    @Test
+    void shouldCreateOrderWhenValidNameWithYO() throws InterruptedException {
+        $("[data-test-id='city'] [class='input__control']" ).setValue("Калуга");
+        $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
+        $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
+        $("[data-test-id='name'] [name='name']").setValue("Артём Артёмов");
+        $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
+        $("[class=checkbox__text]").click();
+        $(By.className("button__text") ).click();
+
+        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(11));
+        String msg = $("[data-test-id=notification]").getText();
+        Assertions.assertTrue(msg.contains("Успешно!"));
+    }
 
     @Test
     void shouldPrintSubWhenInvalidEnglishName() throws InterruptedException {
@@ -120,33 +120,33 @@ public class CardDeliveryNameTest {
         Assertions.assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", msg);
     }
 
-//    @Test
-//    void shouldPrintSubWhenInvalidNameOfOneWord() throws InterruptedException {
-//        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
-//        $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
-//        $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-//        $("[data-test-id='name'] [name='name']").setValue("Андрей");
-//        $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
-//        $("[class=checkbox__text]").click();
-//        $(By.className("button__text")).click();
-//
-//        String msg = $("[data-test-id='name'] [class='input__sub']").getText().trim();
-//        Assertions.assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", msg);
-//    }
-//
-//    @Test
-//    void shouldPrintSubWhenInvalidNameOfOneChar() throws InterruptedException {
-//        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
-//        $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
-//        $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-//        $("[data-test-id='name'] [name='name']").setValue("А");
-//        $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
-//        $("[class=checkbox__text]").click();
-//        $(By.className("button__text")).click();
-//
-//        String msg = $("[data-test-id='name'] [class='input__sub']").getText().trim();
-//        Assertions.assertEquals("Поле обязательно для заполнения", msg);
-//    }
+    @Test
+    void shouldPrintSubWhenInvalidNameOfOneWord() throws InterruptedException {
+        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+        $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
+        $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
+        $("[data-test-id='name'] [name='name']").setValue("Андрей");
+        $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
+        $("[class=checkbox__text]").click();
+        $(By.className("button__text")).click();
+
+        String msg = $("[data-test-id='name'] [class='input__sub']").getText().trim();
+        Assertions.assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", msg);
+    }
+
+    @Test
+    void shouldPrintSubWhenInvalidNameOfOneChar() throws InterruptedException {
+        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+        $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
+        $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
+        $("[data-test-id='name'] [name='name']").setValue("А");
+        $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
+        $("[class=checkbox__text]").click();
+        $(By.className("button__text")).click();
+
+        String msg = $("[data-test-id='name'] [class='input__sub']").getText().trim();
+        Assertions.assertEquals("Поле обязательно для заполнения", msg);
+    }
 
     @Test
     void shouldPrintSubWhenInvalidEmptyName() throws InterruptedException {

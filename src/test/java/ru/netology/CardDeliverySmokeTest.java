@@ -68,19 +68,19 @@ public class CardDeliverySmokeTest {
         Assertions.assertEquals("Доставка в выбранный город недоступна", msg);
     }
 
-//    @Test
-//    void shouldCreateOrderWhenAllValidNeedsTrim(){
-//        $("[data-test-id='city'] [class='input__control']" ).setValue("  Калуга ");
-//        $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
-//        $("[data-test-id='date'] [class='input__control']").setValue(" " + setDateForTest(11) + "  ");
-//        $("[data-test-id='name'] [name='name']").setValue(" Андрей Лазаренков  ");
-//        $("[data-test-id='phone'] [name='phone']").setValue("  +79109101122  ");
-//        $("[class=checkbox__text]").click();
-//        $(By.className("button__text") ).click();
-//
-//        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(11));
-//        String msg = $("[data-test-id=notification]").getText();
-//        Assertions.assertTrue(msg.contains("Успешно!"));
-//    }
+    @Test
+    void shouldCreateOrderWhenAllValidNeedsTrim(){
+        $("[data-test-id='city'] [class='input__control']" ).setValue("  Калуга ");
+        $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
+        $("[data-test-id='date'] [class='input__control']").setValue(" " + setDateForTest(11) + "  ");
+        $("[data-test-id='name'] [name='name']").setValue(" Андрей Лазаренков  ");
+        $("[data-test-id='phone'] [name='phone']").setValue("  +79109101122  ");
+        $("[class=checkbox__text]").click();
+        $(By.className("button__text") ).click();
+
+        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(11));
+        String msg = $("[data-test-id=notification]").getText();
+        Assertions.assertTrue(msg.contains("Успешно!"));
+    }
 
 }
