@@ -24,6 +24,9 @@ public class CardDeliveryDateTest {
 
     private static final String deleteString = Keys.chord(Keys.CONTROL, "a") + Keys.DELETE;
 
+    RegistrationInfo RegistrationInfo() {
+        return DataGenerator.generate("ru");
+    }
 
     @BeforeEach
     void startBrowser() {
@@ -32,30 +35,35 @@ public class CardDeliveryDateTest {
     }
 
     @Test
-    void shouldPrintSubWhenDateNegative() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenDateNegative() {
+        $("[data-test-id='city'] [class='input__control']").setValue(deleteString);
+        $("[data-test-id='city'] [class='input__control']").setValue(RegistrationInfo().getCity());
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(-1));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
-        $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
+        $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
+        $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='date'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Заказ на выбранную дату невозможен", msg);
+        $("[data-test-id='date'] [class='input__sub']").shouldHave(text("Р—Р°РєР°Р· РЅР° РІС‹Р±СЂР°РЅРЅСѓСЋ РґР°С‚Сѓ РЅРµРІРѕР·РјРѕР¶РµРЅ"));
     }
 
     @Test
-    void shouldCreateOrderWhenDateAuto() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
-        $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
+    void shouldCreateOrderWhenDateAuto() {
+        $("[data-test-id='city'] [class='input__control']").setValue(deleteString);
+        $("[data-test-id='city'] [class='input__control']").setValue(RegistrationInfo().getCity());
+        $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
+        $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(11));
-        String msg = $("[data-test-id=notification]").getText();
-        Assertions.assertTrue(msg.contains("Успешно!"));
+        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(12));
+        $(".notification__title")
+                .shouldHave(text("РЈСЃРїРµС€РЅРѕ!"), Duration.ofSeconds(12))
+                .shouldBe(visible);
+        $(".notification__content")
+                .shouldHave(text("Р’СЃС‚СЂРµС‡Р° СѓСЃРїРµС€РЅРѕ Р·Р°Р±СЂРѕРЅРёСЂРѕРІР°РЅР° РЅР° " + setDateForTest(3)), Duration.ofSeconds(12))
+                .shouldBe(visible);
     }
 
 }

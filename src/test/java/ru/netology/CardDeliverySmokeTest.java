@@ -1,15 +1,18 @@
 package ru.netology;
 
 import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.codeborne.selenide.logevents.LogEventListener;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import com.github.javafaker.Faker;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
@@ -24,6 +27,16 @@ public class CardDeliverySmokeTest {
 
     private static final String deleteString = Keys.chord(Keys.CONTROL, "a") + Keys.DELETE;
 
+    RegistrationInfo RegistrationInfo() {
+        return DataGenerator.generate("ru");
+    }
+
+    @BeforeAll
+    static void setUpAll(){
+        SelenideLogger.addListener("allure", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false));
+    }
 
     @BeforeEach
     void startBrowser() {
@@ -31,56 +44,80 @@ public class CardDeliverySmokeTest {
         open("http://localhost:9999/");
     }
 
+    @AfterAll
+    static void tearsDownAll(){
+        SelenideLogger.removeListener("allure");
+    }
+
+
     @Test
-    void shouldCreateOrderWhenAllValuesPositive() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void sout(){
+
+       System.out.println(RegistrationInfo().getName());
+        System.out.println(RegistrationInfo().getName());
+        System.out.println(RegistrationInfo().getName());
+
+    }
+    @Test
+    void shouldCreateOrderWhenAllValuesPositive(){
+        $("[data-test-id='city'] [class='input__control']").setValue(deleteString);
+        $("[data-test-id='city'] [class='input__control']").setValue(RegistrationInfo().getCity());
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
-        $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
+        $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
+        $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(11));
-        String msg = $("[data-test-id=notification]").getText();
-        Assertions.assertTrue(msg.contains("Успешно!"));
+        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(12));
+        $(".notification__title")
+                .shouldHave(text("РЈСЃРїРµС€РЅРѕ!"), Duration.ofSeconds(12))
+                .shouldBe(visible);
+        $(".notification__content")
+                .shouldHave(text("Р’СЃС‚СЂРµС‡Р° СѓСЃРїРµС€РЅРѕ Р·Р°Р±СЂРѕРЅРёСЂРѕРІР°РЅР° РЅР° " + setDateForTest(11)), Duration.ofSeconds(12))
+                .shouldBe(visible);
     }
 
     @Test
-    void shouldPrintSubWhenAllValuesEmpty() throws InterruptedException {
+    void shouldPrintSubWhenAllValuesEmpty(){
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='city'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Поле обязательно для заполнения", msg);
+        $("[data-test-id='city'] [class='input__sub']").shouldHave(text("РџРѕР»Рµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ"));
     }
 
     @Test
-    void shouldPrintSubWhenAllValuesNegative() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Урюпинск");
+    void shouldPrintSubWhenAllValuesNegative(){
+        $("[data-test-id='city'] [class='input__control']").setValue(deleteString);
+        $("[data-test-id='city'] [class='input__control']").setValue(RegistrationInfo().getName());
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(-3));
-        $("[data-test-id='name'] [name='name']").setValue("А");
-        $("[data-test-id='phone'] [name='phone']").setValue("910910112");
+        $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getRandomSymbol());
+        $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhoneNoPlus12());
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='city'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Доставка в выбранный город недоступна", msg);
+        $("[data-test-id='city'] [class='input__sub']").shouldHave(text("Р”РѕСЃС‚Р°РІРєР° РІ РІС‹Р±СЂР°РЅРЅС‹Р№ РіРѕСЂРѕРґ РЅРµРґРѕСЃС‚СѓРїРЅР°"));
+
     }
 
-    @Test
-    void shouldCreateOrderWhenAllValidNeedsTrim(){
-        $("[data-test-id='city'] [class='input__control']" ).setValue("  Калуга ");
-        $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
-        $("[data-test-id='date'] [class='input__control']").setValue(" " + setDateForTest(11) + "  ");
-        $("[data-test-id='name'] [name='name']").setValue(" Андрей Лазаренков  ");
-        $("[data-test-id='phone'] [name='phone']").setValue("  +79109101122  ");
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text") ).click();
-
-        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(11));
-        String msg = $("[data-test-id=notification]").getText();
-        Assertions.assertTrue(msg.contains("Успешно!"));
-    }
+//    @Test
+//    void shouldCreateOrderWhenAllValidNeedsTrim() {
+//        $("[data-test-id='city'] [class='input__control']").setValue(deleteString);
+//        $("[data-test-id='city'] [class='input__control']").setValue(" " + RegistrationInfo().getCity() + "  ");
+//        $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
+//        $("[data-test-id='date'] [class='input__control']").setValue(" " + setDateForTest(11) + "  ");
+//        $("[data-test-id='name'] [name='name']").setValue(" " + RegistrationInfo().getName());
+//        $("[data-test-id='phone'] [name='phone']").setValue(" " + RegistrationInfo().getPhone() + " ");
+//        $("[class=checkbox__text]").click();
+//        $(By.className("button__text")).click();
+//
+//        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(12));
+//        $(".notification__title")
+//                .shouldHave(text("РЈСЃРїРµС€РЅРѕ!"), Duration.ofSeconds(12))
+//                .shouldBe(visible);
+//        $(".notification__content")
+//                .shouldHave(text("Р’СЃС‚СЂРµС‡Р° СѓСЃРїРµС€РЅРѕ Р·Р°Р±СЂРѕРЅРёСЂРѕРІР°РЅР° РЅР° " + setDateForTest(11)), Duration.ofSeconds(12))
+//                .shouldBe(visible);
+//    }
 
 }

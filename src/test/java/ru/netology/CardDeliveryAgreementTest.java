@@ -24,6 +24,10 @@ public class CardDeliveryAgreementTest {
 
     private static final String deleteString = Keys.chord(Keys.CONTROL, "a") + Keys.DELETE;
 
+    RegistrationInfo RegistrationInfo() {
+        return DataGenerator.generate("ru");
+    }
+
 
     @BeforeEach
     void startBrowser() {
@@ -32,16 +36,18 @@ public class CardDeliveryAgreementTest {
     }
 
     @Test
-    void shouldPrintSubWhenAgreementNotChecked() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldBeRedTextWhenAgreementNotChecked() {
+        $("[data-test-id='city'] [class='input__control']").setValue(deleteString);
+        $("[data-test-id='city'] [class='input__control']").setValue(RegistrationInfo().getCity());
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
-        $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
+        $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
+        $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
 
         $(By.className("button__text")).click();
 
-        String color = $("[data-test-id='agreement'] [class=checkbox__text]").getCssValue("color");
-        Assertions.assertEquals("rgba(255, 92, 92, 1)", color);
+        $("[data-test-id='agreement'] [class=checkbox__text]")
+                .shouldNotHave(cssValue("color", "rgba(11,31,53,.95)"));
     }
 }
+

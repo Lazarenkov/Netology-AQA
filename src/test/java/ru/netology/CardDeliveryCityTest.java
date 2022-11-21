@@ -24,6 +24,10 @@ public class CardDeliveryCityTest {
 
     private static final String deleteString = Keys.chord(Keys.CONTROL, "a") + Keys.DELETE;
 
+    RegistrationInfo RegistrationInfo() {
+        return DataGenerator.generate("ru");
+    }
+
 
     @BeforeEach
     void startBrowser() {
@@ -32,58 +36,58 @@ public class CardDeliveryCityTest {
     }
 
     @Test
-    void shouldPrintSubWhenNameOfCityIsNotFromList() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Урюпинск");
+    void shouldPrintSubWhenNameOfCityIsNotFromList() {
+        $("[data-test-id='city'] [class='input__control']").setValue(deleteString);
+        $("[data-test-id='city'] [class='input__control']").setValue("РЈСЂСЋРїРёРЅСЃРє");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
-        $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
+        $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
+        $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getName());
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='city'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Доставка в выбранный город недоступна", msg);
+        $("[data-test-id='city'] [class='input__sub']").shouldHave(text("Р”РѕСЃС‚Р°РІРєР° РІ РІС‹Р±СЂР°РЅРЅС‹Р№ РіРѕСЂРѕРґ РЅРµРґРѕСЃС‚СѓРїРЅР°"));
     }
 
     @Test
-    void shouldPrintSubWhenNameOfCityIsOneLetter() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("У");
+    void shouldPrintSubWhenNameOfCityIsOneLetter() {
+        $("[data-test-id='city'] [class='input__control']").setValue(deleteString);
+        $("[data-test-id='city'] [class='input__control']").setValue(RegistrationInfo().getRandomLetter());
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
-        $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
+        $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
+        $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='city'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Доставка в выбранный город недоступна", msg);
+        $("[data-test-id='city'] [class='input__sub']").shouldHave(text("Р”РѕСЃС‚Р°РІРєР° РІ РІС‹Р±СЂР°РЅРЅС‹Р№ РіРѕСЂРѕРґ РЅРµРґРѕСЃС‚СѓРїРЅР°"));
     }
 
     @Test
-    void shouldPrintSubWhenNameOfCityIsDigit() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("1");
+    void shouldPrintSubWhenNameOfCityIsDigit() {
+        $("[data-test-id='city'] [class='input__control']").setValue(deleteString);
+        $("[data-test-id='city'] [class='input__control']").setValue(RegistrationInfo().getRandomDigit());
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
-        $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
+        $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
+        $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='city'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Доставка в выбранный город недоступна", msg);
+        $("[data-test-id='city'] [class='input__sub']").shouldHave(text("Р”РѕСЃС‚Р°РІРєР° РІ РІС‹Р±СЂР°РЅРЅС‹Р№ РіРѕСЂРѕРґ РЅРµРґРѕСЃС‚СѓРїРЅР°"));
     }
 
     @Test
-    void shouldPrintSubWhenNameOfCityIsChar() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("К");
+    void shouldPrintSubWhenNameOfCityIsLetter() {
+        $("[data-test-id='city'] [class='input__control']").setValue(deleteString);
+        $("[data-test-id='city'] [class='input__control']").setValue(RegistrationInfo().getRandomLetter());
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
-        $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
+        $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
+        $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='city'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Доставка в выбранный город недоступна", msg);
+        $("[data-test-id='city'] [class='input__sub']").shouldHave(text("Р”РѕСЃС‚Р°РІРєР° РІ РІС‹Р±СЂР°РЅРЅС‹Р№ РіРѕСЂРѕРґ РЅРµРґРѕСЃС‚СѓРїРЅР°"));
     }
 }
