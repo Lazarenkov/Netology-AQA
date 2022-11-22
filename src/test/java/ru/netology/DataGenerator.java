@@ -5,6 +5,7 @@ import com.github.javafaker.Faker;
 import lombok.experimental.UtilityClass;
 
 import java.util.Locale;
+import java.util.Random;
 
 @UtilityClass
 public class DataGenerator {
@@ -13,13 +14,13 @@ public class DataGenerator {
         Faker faker = new Faker(new Locale(locale));
         Faker faker1 = new Faker(new Locale("EN"));
 
-        String randomDigit = String.valueOf((int) (Math.random()*10));
+        String randomDigit = String.valueOf((int) (new Random().nextInt(10)));
 
         String[] letters = {"А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я"};
-        String randomLetter = letters[(int) (Math.random()* letters.length-1)];
+        String randomLetter = letters[new Random().nextInt(letters.length-1)];
 
         String[] chars = {"!", "@", "#", "$", "%", "^", "&", "*", "(", ")", ".", ",", "/", ";", ":", "<", ">", "+", "|", "=", "_"};
-        String randomSymbol = chars[(int) (Math.random()* chars.length-1)];
+        String randomSymbol = chars[new Random().nextInt(chars.length-1)];
 
         String[] cities = {"Абакан", "Анадырь", "Архангельск","Астрахань","Барнаул","Белгород","Биробиджан","Благовещенск","Брянск",
         "Великий Новгород","Владивосток","Владикавказ","Владимир","Волгоград","Вологда","Воронеж","Горно-Алтайск",
@@ -30,7 +31,7 @@ public class DataGenerator {
         "Самара","Санкт-Петербург","Саранск","Саратов","Севастополь","Симферополь","Смоленск","Ставрополь","Сыктывкар",
         "Тамбов","Тверь","Томск","Тула","Тюмень","Улан-Удэ","Ульяновск","Уфа","Хабаровск","Ханты-Мансийск","Чебоксары",
         "Челябинск","Черкесск","Чита","Элиста","Южно-Сахалинск","Якутск","Ярославль"};
-        String city = cities[(int) (Math.random()*cities.length-1)];
+        String city = cities[(int) (new Random().nextInt(cities.length-1))];
 
 
         String name = createNameWithoutYO();

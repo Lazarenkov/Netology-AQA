@@ -95,25 +95,25 @@ public class CardDeliveryNameTest {
                 .shouldBe(visible);
     }
 
-    @Test
-    void shouldCreateOrderWhenValidNameWithYO() {
-        $("[data-test-id='city'] [class='input__control']").setValue(deleteString);
-        $("[data-test-id='city'] [class='input__control']").setValue(RegistrationInfo().getCity());
-        $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
-        $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getNameWithYO());
-        $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
-
-        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(12));
-        $(".notification__title")
-                .shouldHave(text("Успешно!"), Duration.ofSeconds(12))
-                .shouldBe(visible);
-        $(".notification__content")
-                .shouldHave(text("Встреча успешно забронирована на " + setDateForTest(11)), Duration.ofSeconds(12))
-                .shouldBe(visible);
-    }
+//    @Test
+//    void shouldCreateOrderWhenValidNameWithYO() {
+//        $("[data-test-id='city'] [class='input__control']").setValue(deleteString);
+//        $("[data-test-id='city'] [class='input__control']").setValue(RegistrationInfo().getCity());
+//        $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
+//        $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
+//        $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getNameWithYO());
+//        $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
+//        $("[class=checkbox__text]").click();
+//        $(By.className("button__text")).click();
+//
+//        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(12));
+//        $(".notification__title")
+//                .shouldHave(text("Успешно!"), Duration.ofSeconds(12))
+//                .shouldBe(visible);
+//        $(".notification__content")
+//                .shouldHave(text("Встреча успешно забронирована на " + setDateForTest(11)), Duration.ofSeconds(12))
+//                .shouldBe(visible);
+//    }
 
     @Test
     void shouldPrintSubWhenInvalidEnglishName() {
