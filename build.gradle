@@ -18,10 +18,10 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
 }
 
-compileJava.options.encoding = 'windows-1251'
+sourceCompatibility = 11
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
 
-tasks.withType(JavaCompile) {
-    options.encoding = 'windows-1251'
-}

@@ -33,114 +33,106 @@ public class CardDeliveryPhoneTest {
     }
 
     @Test
-    void shouldPrintSubWhenEmptyPhone() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenEmptyPhone() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№ Р›Р°Р·Р°СЂРµРЅРєРѕРІ");
 
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='phone'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Поле обязательно для заполнения", msg);
+        $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("РџРѕР»Рµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ"));
     }
 
     @Test
-    void shouldPrintSubWhenPhoneWithoutPlus() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenPhoneWithoutPlus() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№ Р›Р°Р·Р°СЂРµРЅРєРѕРІ");
         $("[data-test-id='phone'] [name='phone']").setValue("79109101122");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='phone'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", msg);
+        $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("РўРµР»РµС„РѕРЅ СѓРєР°Р·Р°РЅ РЅРµРІРµСЂРЅРѕ"));
     }
 
     @Test
-    void shouldPrintSubWhenPhoneWithOneDigitAndPlus() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenPhoneWithOneDigitAndPlus() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№ Р›Р°Р·Р°СЂРµРЅРєРѕРІ");
         $("[data-test-id='phone'] [name='phone']").setValue("+7");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='phone'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", msg);
+        $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("РўРµР»РµС„РѕРЅ СѓРєР°Р·Р°РЅ РЅРµРІРµСЂРЅРѕ"));
     }
 
     @Test
-    void shouldPrintSubWhenPhoneWithOneDigitAndNoPlus() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenPhoneWithOneDigitAndNoPlus() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№ Р›Р°Р·Р°СЂРµРЅРєРѕРІ");
         $("[data-test-id='phone'] [name='phone']").setValue("7");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='phone'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", msg);
+        $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("РўРµР»РµС„РѕРЅ СѓРєР°Р·Р°РЅ РЅРµРІРµСЂРЅРѕ"));
     }
 
     @Test
-    void shouldPrintSubWhenPhoneWithTenDigitsAndPlus() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenPhoneWithTenDigitsAndPlus() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№ Р›Р°Р·Р°СЂРµРЅРєРѕРІ");
         $("[data-test-id='phone'] [name='phone']").setValue("+7910910112");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='phone'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", msg);
+        $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("РўРµР»РµС„РѕРЅ СѓРєР°Р·Р°РЅ РЅРµРІРµСЂРЅРѕ"));
     }
 
     @Test
-    void shouldPrintSubWhenPhoneWithTenDigitsAndNoPlus() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenPhoneWithTenDigitsAndNoPlus() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№ Р›Р°Р·Р°СЂРµРЅРєРѕРІ");
         $("[data-test-id='phone'] [name='phone']").setValue("791091011");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='phone'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", msg);
+        $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("РўРµР»РµС„РѕРЅ СѓРєР°Р·Р°РЅ РЅРµРІРµСЂРЅРѕ"));
     }
 
     @Test
-    void shouldPrintSubWhenPhoneWithTwelveDigitsAndPlus() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenPhoneWithTwelveDigitsAndPlus() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№ Р›Р°Р·Р°СЂРµРЅРєРѕРІ");
         $("[data-test-id='phone'] [name='phone']").setValue("+791091011223");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='phone'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", msg);
+        $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("РўРµР»РµС„РѕРЅ СѓРєР°Р·Р°РЅ РЅРµРІРµСЂРЅРѕ"));
     }
 
     @Test
-    void shouldPrintSubWhenPhoneWithTwelveDigitsAndNoPlus() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenPhoneWithTwelveDigitsAndNoPlus() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№ Р›Р°Р·Р°СЂРµРЅРєРѕРІ");
         $("[data-test-id='phone'] [name='phone']").setValue("791091011223");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='phone'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", msg);
+        $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("РўРµР»РµС„РѕРЅ СѓРєР°Р·Р°РЅ РЅРµРІРµСЂРЅРѕ"));
     }
 }

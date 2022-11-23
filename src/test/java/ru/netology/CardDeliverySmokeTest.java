@@ -32,55 +32,57 @@ public class CardDeliverySmokeTest {
     }
 
     @Test
-    void shouldCreateOrderWhenAllValuesPositive() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldCreateOrderWhenAllValuesPositive() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№ Р›Р°Р·Р°СЂРµРЅРєРѕРІ");
         $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
         $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(11));
-        String msg = $("[data-test-id=notification]").getText();
-        Assertions.assertTrue(msg.contains("Успешно!"));
+        $("[data-test-id=notification]").shouldHave(text("РЈСЃРїРµС€РЅРѕ!"));
+        $("[data-test-id=notification] [class='notification__content']")
+                .shouldHave(text("Р’СЃС‚СЂРµС‡Р° СѓСЃРїРµС€РЅРѕ Р·Р°Р±СЂРѕРЅРёСЂРѕРІР°РЅР° РЅР° " + setDateForTest(11)))
+                .shouldBe(visible, Duration.ofSeconds(15));
     }
 
     @Test
-    void shouldPrintSubWhenAllValuesEmpty() throws InterruptedException {
+    void shouldPrintSubWhenAllValuesEmpty() {
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='city'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Поле обязательно для заполнения", msg);
+        $("[data-test-id='city'] [class='input__sub']").shouldHave(text("РџРѕР»Рµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ"));
     }
 
     @Test
-    void shouldPrintSubWhenAllValuesNegative() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Урюпинск");
+    void shouldPrintSubWhenAllValuesNegative() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РЈСЂСЋРїРёРЅСЃРє");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(-3));
-        $("[data-test-id='name'] [name='name']").setValue("А");
+        $("[data-test-id='name'] [name='name']").setValue("Рђ");
         $("[data-test-id='phone'] [name='phone']").setValue("910910112");
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='city'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Доставка в выбранный город недоступна", msg);
+        $("[data-test-id='city'] [class='input__sub']").shouldHave(text("Р”РѕСЃС‚Р°РІРєР° РІ РІС‹Р±СЂР°РЅРЅС‹Р№ РіРѕСЂРѕРґ РЅРµРґРѕСЃС‚СѓРїРЅР°"));
     }
 
     @Test
     void shouldCreateOrderWhenAllValidNeedsTrim(){
-        $("[data-test-id='city'] [class='input__control']" ).setValue("  Калуга ");
+        $("[data-test-id='city'] [class='input__control']" ).setValue("  РљР°Р»СѓРіР° ");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(" " + setDateForTest(11) + "  ");
-        $("[data-test-id='name'] [name='name']").setValue(" Андрей Лазаренков  ");
+        $("[data-test-id='name'] [name='name']").setValue(" РђРЅРґСЂРµР№ Р›Р°Р·Р°СЂРµРЅРєРѕРІ  ");
         $("[data-test-id='phone'] [name='phone']").setValue("  +79109101122  ");
         $("[class=checkbox__text]").click();
         $(By.className("button__text") ).click();
 
         $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(11));
-        String msg = $("[data-test-id=notification]").getText();
-        Assertions.assertTrue(msg.contains("Успешно!"));
+        $("[data-test-id=notification]").shouldHave(text("РЈСЃРїРµС€РЅРѕ!"));
+        $("[data-test-id=notification] [class='notification__content']")
+                .shouldHave(text("Р’СЃС‚СЂРµС‡Р° СѓСЃРїРµС€РЅРѕ Р·Р°Р±СЂРѕРЅРёСЂРѕРІР°РЅР° РЅР° " + setDateForTest(11)))
+                .shouldBe(visible, Duration.ofSeconds(15));
     }
 
 }

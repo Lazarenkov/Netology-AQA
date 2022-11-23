@@ -32,30 +32,31 @@ public class CardDeliveryDateTest {
     }
 
     @Test
-    void shouldPrintSubWhenDateNegative() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenDateNegative() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(-1));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№ Р›Р°Р·Р°СЂРµРЅРєРѕРІ");
         $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='date'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Заказ на выбранную дату невозможен", msg);
+        $("[data-test-id='date'] [class='input__sub']").shouldHave(text("Р—Р°РєР°Р· РЅР° РІС‹Р±СЂР°РЅРЅСѓСЋ РґР°С‚Сѓ РЅРµРІРѕР·РјРѕР¶РµРЅ"));
     }
 
     @Test
-    void shouldCreateOrderWhenDateAuto() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
+    void shouldCreateOrderWhenDateAuto() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№ Р›Р°Р·Р°СЂРµРЅРєРѕРІ");
         $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
         $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(11));
-        String msg = $("[data-test-id=notification]").getText();
-        Assertions.assertTrue(msg.contains("Успешно!"));
+        $("[data-test-id=notification]").shouldHave(text("РЈСЃРїРµС€РЅРѕ!"));
+        $("[data-test-id=notification] [class='notification__content']")
+                .shouldHave(text("Р’СЃС‚СЂРµС‡Р° СѓСЃРїРµС€РЅРѕ Р·Р°Р±СЂРѕРЅРёСЂРѕРІР°РЅР° РЅР° " + setDateForTest(3)))
+                .shouldBe(visible, Duration.ofSeconds(15));
     }
 
 }

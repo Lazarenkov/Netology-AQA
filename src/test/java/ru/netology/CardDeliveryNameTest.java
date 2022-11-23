@@ -33,68 +33,76 @@ public class CardDeliveryNameTest {
     }
 
     @Test
-    void shouldCreateOrderWhenAllValidDoubleName() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldCreateOrderWhenAllValidDoubleName() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Эрих Мария Лазаренков");
+        $("[data-test-id='name'] [name='name']").setValue("Р­СЂРёС… РњР°СЂРёСЏ Р›Р°Р·Р°СЂРµРЅРєРѕРІ");
         $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
         $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(11));
-        String msg = $("[data-test-id=notification]").getText();
-        Assertions.assertTrue(msg.contains("Успешно!"));
+        $("[data-test-id=notification]").shouldHave(text("РЈСЃРїРµС€РЅРѕ!"));
+        $("[data-test-id=notification] [class='notification__content']")
+                .shouldHave(text("Р’СЃС‚СЂРµС‡Р° СѓСЃРїРµС€РЅРѕ Р·Р°Р±СЂРѕРЅРёСЂРѕРІР°РЅР° РЅР° " + setDateForTest(11)))
+                .shouldBe(visible, Duration.ofSeconds(15));
     }
 
     @Test
-    void shouldCreateOrderWhenAllValidDoubleSurname() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldCreateOrderWhenAllValidDoubleSurname() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Мамин-Сибиряк");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№ РњР°РјРёРЅ-РЎРёР±РёСЂСЏРє");
         $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
         $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(11));
-        String msg = $("[data-test-id=notification]").getText();
-        Assertions.assertTrue(msg.contains("Успешно!"));
+        $("[data-test-id=notification]").shouldHave(text("РЈСЃРїРµС€РЅРѕ!"));
+        $("[data-test-id=notification] [class='notification__content']")
+                .shouldHave(text("Р’СЃС‚СЂРµС‡Р° СѓСЃРїРµС€РЅРѕ Р·Р°Р±СЂРѕРЅРёСЂРѕРІР°РЅР° РЅР° " + setDateForTest(11)))
+                .shouldBe(visible, Duration.ofSeconds(15));
     }
 
     @Test
-    void shouldCreateOrderWhenAllValidDoubleNameAndSurname() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldCreateOrderWhenAllValidDoubleNameAndSurname() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Эрих Мария Мамин-Сибиряк");
+        $("[data-test-id='name'] [name='name']").setValue("Р­СЂРёС… РњР°СЂРёСЏ РњР°РјРёРЅ-РЎРёР±РёСЂСЏРє");
         $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
         $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(11));
-        String msg = $("[data-test-id=notification]").getText();
-        Assertions.assertTrue(msg.contains("Успешно!"));
+        $("[data-test-id=notification]").shouldHave(text("РЈСЃРїРµС€РЅРѕ!"));
+        $("[data-test-id=notification] [class='notification__content']")
+                .shouldHave(text("Р’СЃС‚СЂРµС‡Р° СѓСЃРїРµС€РЅРѕ Р·Р°Р±СЂРѕРЅРёСЂРѕРІР°РЅР° РЅР° " + setDateForTest(11)))
+                .shouldBe(visible, Duration.ofSeconds(15));
     }
 
     @Test
-    void shouldCreateOrderWhenValidNameWithYO() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']" ).setValue("Калуга");
+    void shouldCreateOrderWhenValidNameWithYO() {
+        $("[data-test-id='city'] [class='input__control']" ).setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Артём Артёмов");
+        $("[data-test-id='name'] [name='name']").setValue("РђСЂС‚С‘Рј РђСЂС‚С‘РјРѕРІ");
         $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
         $("[class=checkbox__text]").click();
         $(By.className("button__text") ).click();
 
         $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(11));
-        String msg = $("[data-test-id=notification]").getText();
-        Assertions.assertTrue(msg.contains("Успешно!"));
+        $("[data-test-id=notification]").shouldHave(text("РЈСЃРїРµС€РЅРѕ!"));
+        $("[data-test-id=notification] [class='notification__content']")
+                .shouldHave(text("Р’СЃС‚СЂРµС‡Р° СѓСЃРїРµС€РЅРѕ Р·Р°Р±СЂРѕРЅРёСЂРѕРІР°РЅР° РЅР° " + setDateForTest(11)))
+                .shouldBe(visible, Duration.ofSeconds(15));
     }
 
     @Test
-    void shouldPrintSubWhenInvalidEnglishName() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenInvalidEnglishName() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue("Andrew Lazarenkov");
@@ -102,55 +110,52 @@ public class CardDeliveryNameTest {
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='name'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", msg);
+        $("[data-test-id='name'] [class='input__sub']").shouldHave(text("РРјСЏ Рё Р¤Р°РјРёР»РёСЏ СѓРєР°Р·Р°РЅС‹Рµ РЅРµРІРµСЂРЅРѕ"));
+
     }
 
     @Test
-    void shouldPrintSubWhenInvalidNameWithChars() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenInvalidNameWithChars() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей! Лазаренков");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№! Р›Р°Р·Р°СЂРµРЅРєРѕРІ");
         $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='name'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", msg);
+        $("[data-test-id='name'] [class='input__sub']").shouldHave(text("РРјСЏ Рё Р¤Р°РјРёР»РёСЏ СѓРєР°Р·Р°РЅС‹Рµ РЅРµРІРµСЂРЅРѕ"));
     }
 
     @Test
-    void shouldPrintSubWhenInvalidNameOfOneWord() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenInvalidNameOfOneWord() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№");
         $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='name'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", msg);
+        $("[data-test-id='name'] [class='input__sub']").shouldHave(text("РРјСЏ Рё Р¤Р°РјРёР»РёСЏ СѓРєР°Р·Р°РЅС‹Рµ РЅРµРІРµСЂРЅРѕ"));
     }
 
     @Test
-    void shouldPrintSubWhenInvalidNameOfOneChar() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenInvalidNameOfOneChar() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("А");
+        $("[data-test-id='name'] [name='name']").setValue("Рђ");
         $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='name'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Поле обязательно для заполнения", msg);
+        $("[data-test-id='name'] [class='input__sub']").shouldHave(text("РџРѕР»Рµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ"));
     }
 
     @Test
-    void shouldPrintSubWhenInvalidEmptyName() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenInvalidEmptyName() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
 
@@ -158,13 +163,12 @@ public class CardDeliveryNameTest {
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='name'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Поле обязательно для заполнения", msg);
+        $("[data-test-id='name'] [class='input__sub']").shouldHave(text("РџРѕР»Рµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ"));
     }
 
     @Test
-    void shouldPrintSubWhenInvalidSpaceName() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenInvalidSpaceName() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(" ");
@@ -172,7 +176,6 @@ public class CardDeliveryNameTest {
         $("[class=checkbox__text]").click();
         $(By.className("button__text")).click();
 
-        String msg = $("[data-test-id='name'] [class='input__sub']").getText().trim();
-        Assertions.assertEquals("Поле обязательно для заполнения", msg);
+        $("[data-test-id='name'] [class='input__sub']").shouldHave(text("РџРѕР»Рµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ"));
     }
 }

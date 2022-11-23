@@ -32,16 +32,16 @@ public class CardDeliveryAgreementTest {
     }
 
     @Test
-    void shouldPrintSubWhenAgreementNotChecked() throws InterruptedException {
-        $("[data-test-id='city'] [class='input__control']").setValue("Калуга");
+    void shouldPrintSubWhenAgreementNotChecked() {
+        $("[data-test-id='city'] [class='input__control']").setValue("РљР°Р»СѓРіР°");
         $("[data-test-id='date'] [class='input__control']").setValue(deleteString);
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
-        $("[data-test-id='name'] [name='name']").setValue("Андрей Лазаренков");
+        $("[data-test-id='name'] [name='name']").setValue("РђРЅРґСЂРµР№ Р›Р°Р·Р°СЂРµРЅРєРѕРІ");
         $("[data-test-id='phone'] [name='phone']").setValue("+79109101122");
 
         $(By.className("button__text")).click();
 
-        String color = $("[data-test-id='agreement'] [class=checkbox__text]").getCssValue("color");
-        Assertions.assertEquals("rgba(255, 92, 92, 1)", color);
+        $("[data-test-id='agreement'] [class=checkbox__text]")
+                .shouldBe(cssValue("color", "rgba(255, 92, 92, 1)"));
     }
 }
