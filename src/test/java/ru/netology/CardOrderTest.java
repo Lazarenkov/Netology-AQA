@@ -1,16 +1,19 @@
 package ru.netology;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import java.util.List;
-import java.util.Set;
+import java.io.File;
+import java.io.IOException;
+
 
 public class CardOrderTest {
 
@@ -19,23 +22,24 @@ public class CardOrderTest {
     @BeforeAll
     static void configureWebDriver() {
         WebDriverManager.chromedriver().setup();
+
     }
 
     @BeforeEach
-    void startBrowser() {
-
-
+    void startBrowser() throws IOException {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
-        driver = new ChromeDriver(options);
 
+        driver = new ChromeDriver(options);
         driver.get("http://localhost:9999");
+        File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenshot, new File("./build/reports/tests/test/"+screenshot.getName()));
     }
 
     @AfterEach
-    void quitBrowser() {
+    void tearsDown() {
         driver.quit();
         driver = null;
     }
