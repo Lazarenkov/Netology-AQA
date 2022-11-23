@@ -27,7 +27,6 @@ public class CardDeliverySmokeTest {
 
     @BeforeEach
     void startBrowser() {
-        Configuration.headless = true;
         open("http://localhost:9999/");
     }
 

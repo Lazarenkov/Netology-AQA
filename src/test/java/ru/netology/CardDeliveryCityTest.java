@@ -1,19 +1,16 @@
 package ru.netology;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.*;
+
 
 
 public class CardDeliveryCityTest {
@@ -27,7 +24,6 @@ public class CardDeliveryCityTest {
 
     @BeforeEach
     void startBrowser() {
-        Configuration.headless = true;
         open("http://localhost:9999/");
     }
 
