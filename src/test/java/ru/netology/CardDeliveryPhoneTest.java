@@ -31,7 +31,6 @@ public class CardDeliveryPhoneTest {
 
     @BeforeEach
     void startBrowser() {
-        Configuration.headless = true;
         open("http://localhost:9999/");
     }
 
@@ -43,8 +42,8 @@ public class CardDeliveryPhoneTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
 
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
         $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("Поле обязательно для заполнения"));
     }
@@ -57,8 +56,8 @@ public class CardDeliveryPhoneTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhoneNoPlus());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
         $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("Телефон указан неверно"));
     }
@@ -71,8 +70,8 @@ public class CardDeliveryPhoneTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhoneWithPlus1());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
         $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("Телефон указан неверно"));
     }
@@ -85,8 +84,8 @@ public class CardDeliveryPhoneTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getRandomDigit());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
 
         $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("Телефон указан неверно"));
@@ -100,8 +99,8 @@ public class CardDeliveryPhoneTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhoneWithPlus10());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
         $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("Телефон указан неверно"));
     }
@@ -114,8 +113,8 @@ public class CardDeliveryPhoneTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhoneNoPlus10());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
         $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("Телефон указан неверно"));
     }
@@ -128,8 +127,8 @@ public class CardDeliveryPhoneTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhoneWithPlus12());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
         $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("Телефон указан неверно"));
     }
@@ -142,8 +141,8 @@ public class CardDeliveryPhoneTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhoneNoPlus12());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
         $("[data-test-id='phone'] [class='input__sub']").shouldHave(text("Телефон указан неверно"));
     }

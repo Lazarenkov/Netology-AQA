@@ -31,7 +31,6 @@ public class CardDeliveryAgreementTest {
 
     @BeforeEach
     void startBrowser() {
-        Configuration.headless = true;
         open("http://localhost:9999/");
     }
 
@@ -44,7 +43,7 @@ public class CardDeliveryAgreementTest {
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
 
-        $(By.className("button__text")).click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
         $("[data-test-id='agreement'] [class=checkbox__text]")
                 .shouldNotHave(cssValue("color", "rgba(11,31,53,.95)"));

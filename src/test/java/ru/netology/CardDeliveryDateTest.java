@@ -30,7 +30,6 @@ public class CardDeliveryDateTest {
 
     @BeforeEach
     void startBrowser() {
-        Configuration.headless = true;
         open("http://localhost:9999/");
     }
 
@@ -42,8 +41,8 @@ public class CardDeliveryDateTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(-1));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
         $("[data-test-id='date'] [class='input__sub']").shouldHave(text("Заказ на выбранную дату невозможен"));
     }
@@ -54,16 +53,14 @@ public class CardDeliveryDateTest {
         $("[data-test-id='city'] [class='input__control']").setValue(RegistrationInfo().getCity());
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getName());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
-        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(12));
-        $(".notification__title")
-                .shouldHave(text("Успешно!"), Duration.ofSeconds(12))
-                .shouldBe(visible);
-        $(".notification__content")
-                .shouldHave(text("Встреча успешно забронирована на " + setDateForTest(3)), Duration.ofSeconds(12))
-                .shouldBe(visible);
+        $("[data-test-id='success-notification']").shouldBe(visible, Duration.ofSeconds(1));
+        $("[data-test-id='success-notification'] [class='notification__title']")
+                .shouldHave(text("Успешно!"));
+        $("[data-test-id='success-notification'] [class='notification__content']")
+                .shouldHave(text("Встреча успешно запланирована на " + setDateForTest(3)));
     }
 
 }

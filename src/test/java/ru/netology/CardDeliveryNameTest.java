@@ -31,7 +31,6 @@ public class CardDeliveryNameTest {
 
     @BeforeEach
     void startBrowser() {
-       Configuration.headless = true;
         open("http://localhost:9999/");
     }
 
@@ -43,16 +42,14 @@ public class CardDeliveryNameTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getFirstNameDoubled() + " " + RegistrationInfo().getLastName());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
-        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(12));
-        $(".notification__title")
-                .shouldHave(text("Успешно!"), Duration.ofSeconds(12))
-                .shouldBe(visible);
-        $(".notification__content")
-                .shouldHave(text("Встреча успешно забронирована на " + setDateForTest(11)), Duration.ofSeconds(12))
-                .shouldBe(visible);
+        $("[data-test-id='success-notification']").shouldBe(visible, Duration.ofSeconds(1));
+        $("[data-test-id='success-notification'] [class='notification__title']")
+                .shouldHave(text("Успешно!"));
+        $("[data-test-id='success-notification'] [class='notification__content']")
+                .shouldHave(text("Встреча успешно запланирована на " + setDateForTest(11)));
     }
 
     @Test
@@ -63,16 +60,14 @@ public class CardDeliveryNameTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getFirstName() + " " + RegistrationInfo().getLastNameDoubled());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
-        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(12));
-        $(".notification__title")
-                .shouldHave(text("Успешно!"), Duration.ofSeconds(12))
-                .shouldBe(visible);
-        $(".notification__content")
-                .shouldHave(text("Встреча успешно забронирована на " + setDateForTest(11)), Duration.ofSeconds(12))
-                .shouldBe(visible);
+        $("[data-test-id='success-notification']").shouldBe(visible, Duration.ofSeconds(1));
+        $("[data-test-id='success-notification'] [class='notification__title']")
+                .shouldHave(text("Успешно!"));
+        $("[data-test-id='success-notification'] [class='notification__content']")
+                .shouldHave(text("Встреча успешно запланирована на " + setDateForTest(11)));
     }
 
     @Test
@@ -83,16 +78,14 @@ public class CardDeliveryNameTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getFirstNameDoubled() + " " + RegistrationInfo().getLastNameDoubled());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
-        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(12));
-        $(".notification__title")
-                .shouldHave(text("Успешно!"), Duration.ofSeconds(12))
-                .shouldBe(visible);
-        $(".notification__content")
-                .shouldHave(text("Встреча успешно забронирована на " + setDateForTest(11)), Duration.ofSeconds(12))
-                .shouldBe(visible);
+        $("[data-test-id='success-notification']").shouldBe(visible, Duration.ofSeconds(1));
+        $("[data-test-id='success-notification'] [class='notification__title']")
+                .shouldHave(text("Успешно!"));
+        $("[data-test-id='success-notification'] [class='notification__content']")
+                .shouldHave(text("Встреча успешно запланирована на " + setDateForTest(11)));
     }
 
     @Test
@@ -103,16 +96,14 @@ public class CardDeliveryNameTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getNameWithYO());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
-        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(12));
-        $(".notification__title")
-                .shouldHave(text("Успешно!"), Duration.ofSeconds(12))
-                .shouldBe(visible);
-        $(".notification__content")
-                .shouldHave(text("Встреча успешно забронирована на " + setDateForTest(11)), Duration.ofSeconds(12))
-                .shouldBe(visible);
+        $("[data-test-id='success-notification']").shouldBe(visible, Duration.ofSeconds(1));
+        $("[data-test-id='success-notification'] [class='notification__title']")
+                .shouldHave(text("Успешно!"));
+        $("[data-test-id='success-notification'] [class='notification__content']")
+                .shouldHave(text("Встреча успешно запланирована на " + setDateForTest(11)));
     }
 
     @Test
@@ -123,8 +114,8 @@ public class CardDeliveryNameTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getEnglishName());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
         $("[data-test-id='name'] [class='input__sub']").shouldHave(text("Имя и Фамилия указаные неверно"));
     }
@@ -137,8 +128,8 @@ public class CardDeliveryNameTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getFirstName() + RegistrationInfo().getRandomSymbol() + " " + RegistrationInfo().getLastName() + RegistrationInfo().getRandomSymbol());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
         $("[data-test-id='name'] [class='input__sub']").shouldHave(text("Имя и Фамилия указаные неверно"));
     }
@@ -151,10 +142,10 @@ public class CardDeliveryNameTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getFirstName());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
-        $("[data-test-id='name'] [class='input__sub']").shouldHave(text("Укажите точно как в паспорте"));
+        $("[data-test-id='name'] [class='input__sub']").shouldHave(text("Поле обязательно для заполнения"));
     }
 
     @Test
@@ -165,10 +156,10 @@ public class CardDeliveryNameTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(RegistrationInfo().getRandomLetter());
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
-        $("[data-test-id='name'] [class='input__sub']").shouldHave(text("Укажите точно как в паспорте"));
+        $("[data-test-id='name'] [class='input__sub']").shouldHave(text("Поле обязательно для заполнения"));
     }
 
     @Test
@@ -179,8 +170,8 @@ public class CardDeliveryNameTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
 
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
         $("[data-test-id='name'] [class='input__sub']").shouldHave(text("Поле обязательно для заполнения"));
     }
@@ -193,8 +184,8 @@ public class CardDeliveryNameTest {
         $("[data-test-id='date'] [class='input__control']").setValue(setDateForTest(11));
         $("[data-test-id='name'] [name='name']").setValue(" ");
         $("[data-test-id='phone'] [name='phone']").setValue(RegistrationInfo().getPhone());
-        $("[class=checkbox__text]").click();
-        $(By.className("button__text")).click();
+        $("[data-test-id='agreement'] [class='checkbox__box']").click();
+        $$("[type='button']").findBy(text("Запланировать")).click();
 
         $("[data-test-id='name'] [class='input__sub']").shouldHave(text("Поле обязательно для заполнения"));
     }
