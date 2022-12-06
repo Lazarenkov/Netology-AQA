@@ -10,7 +10,6 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.projectlombok:lombok:1.18.22'
     testImplementation 'com.codeborne:selenide:6.9.0'
     testImplementation 'info.cukes:cucumber-junit:1.2.6'
     implementation 'io.cucumber:cucumber-java:7.9.0'
@@ -19,6 +18,10 @@ dependencies {
     implementation 'org.jetbrains:annotations:20.1.0'
     implementation 'com.github.javafaker:javafaker:1.0.2'
     compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+
 }
 
 test {

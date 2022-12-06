@@ -1,97 +1,56 @@
 package ru.netology.data;
 
-import ru.netology.page.DashboardPage;
+import lombok.Value;
 
 import java.util.Random;
 
 public class DataGenerator {
-
     private DataGenerator() {
     }
 
+    public static AuthInfo getAuthInfo() {
+        return new AuthInfo("vasya", "qwerty123");
+    }
 
+    public static VerificationCode getVerificationCode() {
+        return new VerificationCode("12345");
+    }
+
+    public static CardInfo getFirstCardInfo() {
+        return new CardInfo("5559 0000 0000 0001", "92df3f1c-a033-48e6-8390-206f6b1f56c0");
+    }
+
+    public static CardInfo getSecondCardInfo() {
+        return new CardInfo("5559 0000 0000 0002", "0f3f5c2a-249e-4c3d-8287-09f7a039391d");
+    }
+
+
+    public static int generateValidMoneyAmount(int balance) {
+        return new Random().nextInt(balance) + 1;
+    }
+
+    public static int generateInvalidMoneyAmount(int balance) {
+        return Math.abs(balance) + new Random().nextInt(10000);
+    }
+
+
+    @Value
     public static class AuthInfo {
-        private String login;
-        private String password;
-        private String code;
-
-        public String getValidLogin() {
-            return "vasya";
-        }
-
-        public String getValidPassword() {
-            return "qwerty123";
-        }
-
-        public String getValidCode() {
-            return "12345";
-        }
-
-        public String getInvalidLogin() {
-            return "petya";
-        }
-
-        public String getInvalidPassword() {
-            return "321ytrewq";
-        }
-
-        public String getInvalidCode() {
-            return "54321";
-        }
+        String login;
+        String password;
     }
 
-    public static class transferInfo {
-        private String card1;
-        private String card2;
-        private int moneyAmount;
-
-        public static String getCardNumber(int indexOfCard) {
-            switch (indexOfCard) {
-                case 0:
-                    return "5559 0000 0000 0001";
-                case 1:
-                    return "5559 0000 0000 0002";
-            }
-            return "";
-        }
-
-
-        public int getMoneyAmount(int card, String condition) {
-            switch (condition) {
-                case "Valid":
-                    return DashboardPage.Main.getBalances(card) - 1;
-
-                case "EqualsBalance":
-                    return DashboardPage.Main.getBalances(card);
-
-                    case "AboveBalance":
-                    return DashboardPage.Main.getBalances(card) + 1;
-
-                case "BelowZero":
-                    return -1;
-
-                case "Zero":
-                    return 0;
-
-            }
-            return 0;
-        }
+    @Value
+    public static class VerificationCode {
+        String code;
     }
 
-        public static class additionalInfo{
-            private int randomInt;
-            public int getRandomInt(int bound){
-                return new Random().nextInt(bound);
-            }
-
-            public int getAnotherRandomInt(int bound, int existingRandom){
-                int value;
-                do {
-                    value = new Random().nextInt(bound);
-                } while (value == existingRandom );
-                return value;
-            }
-        }
-
+    @Value
+    public static class CardInfo {
+        String cardNumber;
+        String testID;
+    }
 
 }
+
+

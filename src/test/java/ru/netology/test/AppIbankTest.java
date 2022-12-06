@@ -1,348 +1,188 @@
 package ru.netology.test;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ru.netology.data.DataGenerator;
-import ru.netology.page.DashboardPage;
 import ru.netology.page.LoginPage;
-import ru.netology.page.VerificationPage;
 
 import static com.codeborne.selenide.Selenide.open;
+import static ru.netology.data.DataGenerator.*;
 
 
 public class AppIbankTest {
 
     @BeforeEach
     void startBrowser() {
-        open("http://localhost:9999/");
-    }
-
-    @Test
-    void shouldBeSuccessLogin() {
-        var loginPage = new LoginPage();
-        var info = new DataGenerator.AuthInfo();
-        var verificationPage = new VerificationPage();
-
-        loginPage.validLogin(info);
-        verificationPage.validVerify(info);
-        DashboardPage.Main.verifyEntering();
-    }
-
-    @Test
-    void shouldNotBeSuccessLogin() {
-        var loginPage = new LoginPage();
-        var info = new DataGenerator.AuthInfo();
-        var verificationPage = new VerificationPage();
-
-        loginPage.invalidLogin(info);
-    }
-
-    @Test
-    void shouldBeSuccessTransferToAnotherCardWhenMoneyAmountValid() {
-        var loginPage = new LoginPage();
-        var info = new DataGenerator.AuthInfo();
-        var transferInfo = new DataGenerator.transferInfo();
-        var additionalInfo = new DataGenerator.additionalInfo();
-        var verificationPage = new VerificationPage();
-        var dashboardPage = new DashboardPage();
-        var transfer = dashboardPage.new Transfer();
-
-        loginPage.validLogin(info);
-        verificationPage.validVerify(info);
-        DashboardPage.Main.verifyEntering();
-
-
-        int firstCard = additionalInfo.getRandomInt(2);
-        int secondCard = additionalInfo.getAnotherRandomInt(2, firstCard);
-        int moneyAmount = transferInfo.getMoneyAmount(secondCard, "Valid");
-
-        int[] expected = {
-                DashboardPage.Main.getBalances(firstCard) + moneyAmount,
-                DashboardPage.Main.getBalances(secondCard) - moneyAmount};
-
-        transfer.replenishCard(firstCard).fromCard(secondCard).withMoneyAmount(moneyAmount);
-        DashboardPage.Main.verifyEntering();
-
-        int[] actual = {DashboardPage.Main.getBalances(firstCard), DashboardPage.Main.getBalances(secondCard)};
-
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void shouldBeSuccessTransferToAnotherCardWhenMoneyAmountEqualsBalance() {
-        var loginPage = new LoginPage();
-        var info = new DataGenerator.AuthInfo();
-        var transferInfo = new DataGenerator.transferInfo();
-        var additionalInfo = new DataGenerator.additionalInfo();
-        var verificationPage = new VerificationPage();
-        var dashboardPage = new DashboardPage();
-        var transfer = dashboardPage.new Transfer();
-
-        loginPage.validLogin(info);
-        verificationPage.validVerify(info);
-        DashboardPage.Main.verifyEntering();
-
-
-        int firstCard = additionalInfo.getRandomInt(2);
-        int secondCard = additionalInfo.getAnotherRandomInt(2, firstCard);
-        int moneyAmount = transferInfo.getMoneyAmount(secondCard, "EqualsBalance");
-
-        int[] expected = {
-                DashboardPage.Main.getBalances(firstCard) + moneyAmount,
-                DashboardPage.Main.getBalances(secondCard) - moneyAmount};
-
-        transfer.replenishCard(firstCard).fromCard(secondCard).withMoneyAmount(moneyAmount);
-        DashboardPage.Main.verifyEntering();
-
-        int[] actual = {DashboardPage.Main.getBalances(firstCard), DashboardPage.Main.getBalances(secondCard)};
-
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void shouldNotBeSuccessTransferToAnotherCardWhenMoneyAmountAboveBalance() {
-        var loginPage = new LoginPage();
-        var info = new DataGenerator.AuthInfo();
-        var transferInfo = new DataGenerator.transferInfo();
-        var additionalInfo = new DataGenerator.additionalInfo();
-        var verificationPage = new VerificationPage();
-        var dashboardPage = new DashboardPage();
-        var transfer = dashboardPage.new Transfer();
-
-        loginPage.validLogin(info);
-        verificationPage.validVerify(info);
-        DashboardPage.Main.verifyEntering();
-
-
-        int firstCard = additionalInfo.getRandomInt(2);
-        int secondCard = additionalInfo.getAnotherRandomInt(2, firstCard);
-        int moneyAmount = transferInfo.getMoneyAmount(secondCard, "AboveBalance");
-
-        int[] expected = {
-                DashboardPage.Main.getBalances(firstCard),
-                DashboardPage.Main.getBalances(secondCard)};
-
-        transfer.replenishCard(firstCard).fromCard(secondCard).withMoneyAmount(moneyAmount);
-        DashboardPage.Main.verifyEntering();
-
-        int[] actual = {DashboardPage.Main.getBalances(firstCard), DashboardPage.Main.getBalances(secondCard)};
-
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void shouldBeSuccessTransferToAnotherCardWhenMoneyAmountZero() {
-        var loginPage = new LoginPage();
-        var info = new DataGenerator.AuthInfo();
-        var transferInfo = new DataGenerator.transferInfo();
-        var additionalInfo = new DataGenerator.additionalInfo();
-        var verificationPage = new VerificationPage();
-        var dashboardPage = new DashboardPage();
-        var transfer = dashboardPage.new Transfer();
-
-        loginPage.validLogin(info);
-        verificationPage.validVerify(info);
-        DashboardPage.Main.verifyEntering();
-
-        int firstCard = additionalInfo.getRandomInt(2);
-        int secondCard = additionalInfo.getAnotherRandomInt(2, firstCard);
-        int moneyAmount = transferInfo.getMoneyAmount(secondCard, "Zero");
-
-        int[] expected = {
-                DashboardPage.Main.getBalances(firstCard),
-                DashboardPage.Main.getBalances(secondCard)};
-
-        transfer.replenishCard(firstCard).fromCard(secondCard).withMoneyAmount(moneyAmount);
-        DashboardPage.Main.verifyEntering();
-
-        int[] actual = {DashboardPage.Main.getBalances(firstCard), DashboardPage.Main.getBalances(secondCard)};
-
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void shouldBeCorrectedTransferToAnotherCardWhenMoneyAmountBelowZero() {
-        var loginPage = new LoginPage();
-        var info = new DataGenerator.AuthInfo();
-        var transferInfo = new DataGenerator.transferInfo();
-        var additionalInfo = new DataGenerator.additionalInfo();
-        var verificationPage = new VerificationPage();
-        var dashboardPage = new DashboardPage();
-        var transfer = dashboardPage.new Transfer();
-
-        loginPage.validLogin(info);
-        verificationPage.validVerify(info);
-        DashboardPage.Main.verifyEntering();
-
-        int firstCard = additionalInfo.getRandomInt(2);
-        int secondCard = additionalInfo.getAnotherRandomInt(2, firstCard);
-        int moneyAmount = transferInfo.getMoneyAmount(secondCard, "BelowZero");
-
-        int[] expected = {
-                DashboardPage.Main.getBalances(firstCard) - moneyAmount,
-                DashboardPage.Main.getBalances(secondCard) + moneyAmount};
-
-        transfer.replenishCard(firstCard).fromCard(secondCard).withMoneyAmount(moneyAmount);
-        DashboardPage.Main.verifyEntering();
-
-        int[] actual = {DashboardPage.Main.getBalances(firstCard), DashboardPage.Main.getBalances(secondCard)};
-
-        Assertions.assertArrayEquals(expected, actual);
+        open("http://localhost:9999/", LoginPage.class);
     }
 
 
     @Test
-    void shouldNotBeSuccessTransferToSameCardWhenMoneyAmountValid() {
+    void shouldBeSuccessTransferFromFirstToSecond() {
         var loginPage = new LoginPage();
-        var info = new DataGenerator.AuthInfo();
-        var transferInfo = new DataGenerator.transferInfo();
-        var additionalInfo = new DataGenerator.additionalInfo();
-        var verificationPage = new VerificationPage();
-        var dashboardPage = new DashboardPage();
-        var transfer = dashboardPage.new Transfer();
+        var authInfo = DataGenerator.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataGenerator.getVerificationCode();
+        var dashboardPage = verificationPage.validVerify(verificationCode);
+        var firstCardInfo = getFirstCardInfo();
+        var secondCardInfo = getSecondCardInfo();
+        var firstCardBalance = dashboardPage.getCardBalance(firstCardInfo);
+        var secondCardBalance = dashboardPage.getCardBalance(secondCardInfo);
+        var amount = generateValidMoneyAmount(firstCardBalance);
+        var expectedBalanceFirstCard = firstCardBalance - amount;
+        var expectedBalanceSecondCard = secondCardBalance + amount;
 
-        loginPage.validLogin(info);
-        verificationPage.validVerify(info);
-        DashboardPage.Main.verifyEntering();
+        var transferPage = dashboardPage.selectCardToTransfer(secondCardInfo);
+        dashboardPage = transferPage.makeValidTransfer(String.valueOf(amount), firstCardInfo);
+        var actualBalanceFirstCard = dashboardPage.getCardBalance(firstCardInfo);
+        var actualBalanceSecondCard = dashboardPage.getCardBalance(secondCardInfo);
 
-
-        int firstCard = additionalInfo.getRandomInt(2);
-        int secondCard = additionalInfo.getAnotherRandomInt(2, firstCard);
-        int moneyAmount = transferInfo.getMoneyAmount(firstCard, "valid");
-
-        int[] expected = {
-                DashboardPage.Main.getBalances(firstCard),
-                DashboardPage.Main.getBalances(secondCard)};
-
-        transfer.replenishCard(firstCard).fromCard(firstCard).withMoneyAmount(moneyAmount);
-        DashboardPage.Main.verifyEntering();
-
-        int[] actual = {DashboardPage.Main.getBalances(firstCard), DashboardPage.Main.getBalances(secondCard)};
-
-        Assertions.assertArrayEquals(expected, actual);
+        Assertions.assertEquals(expectedBalanceFirstCard, actualBalanceFirstCard);
+        Assertions.assertEquals(expectedBalanceSecondCard, actualBalanceSecondCard);
     }
 
     @Test
-    void shouldNotBeSuccessTransferToSameCardWhenMoneyEqualsBalance() {
+    void shouldBeSuccessTransferFromSecondToFirst() {
         var loginPage = new LoginPage();
-        var info = new DataGenerator.AuthInfo();
-        var transferInfo = new DataGenerator.transferInfo();
-        var additionalInfo = new DataGenerator.additionalInfo();
-        var verificationPage = new VerificationPage();
-        var dashboardPage = new DashboardPage();
-        var transfer = dashboardPage.new Transfer();
+        var authInfo = DataGenerator.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataGenerator.getVerificationCode();
+        var dashboardPage = verificationPage.validVerify(verificationCode);
+        var firstCardInfo = getFirstCardInfo();
+        var secondCardInfo = getSecondCardInfo();
+        var firstCardBalance = dashboardPage.getCardBalance(firstCardInfo);
+        var secondCardBalance = dashboardPage.getCardBalance(secondCardInfo);
+        var amount = generateValidMoneyAmount(secondCardBalance);
+        var expectedBalanceFirstCard = firstCardBalance + amount;
+        var expectedBalanceSecondCard = secondCardBalance - amount;
 
-        loginPage.validLogin(info);
-        verificationPage.validVerify(info);
-        DashboardPage.Main.verifyEntering();
+        var transferPage = dashboardPage.selectCardToTransfer(firstCardInfo);
+        dashboardPage = transferPage.makeValidTransfer(String.valueOf(amount), secondCardInfo);
+        var actualBalanceFirstCard = dashboardPage.getCardBalance(firstCardInfo);
+        var actualBalanceSecondCard = dashboardPage.getCardBalance(secondCardInfo);
 
-
-        int firstCard = additionalInfo.getRandomInt(2);
-        int secondCard = additionalInfo.getAnotherRandomInt(2, firstCard);
-        int moneyAmount = transferInfo.getMoneyAmount(firstCard, "EqualsBalance");
-
-        int[] expected = {
-                DashboardPage.Main.getBalances(firstCard),
-                DashboardPage.Main.getBalances(secondCard)};
-
-        transfer.replenishCard(firstCard).fromCard(firstCard).withMoneyAmount(moneyAmount);
-        DashboardPage.Main.verifyEntering();
-
-        int[] actual = {DashboardPage.Main.getBalances(firstCard), DashboardPage.Main.getBalances(secondCard)};
-
-        Assertions.assertArrayEquals(expected, actual);
+        Assertions.assertEquals(expectedBalanceFirstCard, actualBalanceFirstCard);
+        Assertions.assertEquals(expectedBalanceSecondCard, actualBalanceSecondCard);
     }
 
     @Test
-    void shouldNotBeSuccessTransferToSameCardWhenMoneyAmountAboveBalance() {
+    void shouldNotBeTransferFromFirstToSecond() {
         var loginPage = new LoginPage();
-        var info = new DataGenerator.AuthInfo();
-        var transferInfo = new DataGenerator.transferInfo();
-        var additionalInfo = new DataGenerator.additionalInfo();
-        var verificationPage = new VerificationPage();
-        var dashboardPage = new DashboardPage();
-        var transfer = dashboardPage.new Transfer();
+        var authInfo = DataGenerator.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataGenerator.getVerificationCode();
+        var dashboardPage = verificationPage.validVerify(verificationCode);
+        var firstCardInfo = getFirstCardInfo();
+        var secondCardInfo = getSecondCardInfo();
+        var firstCardBalance = dashboardPage.getCardBalance(firstCardInfo);
+        var secondCardBalance = dashboardPage.getCardBalance(secondCardInfo);
+        var amount = generateInvalidMoneyAmount(firstCardBalance);
 
-        loginPage.validLogin(info);
-        verificationPage.validVerify(info);
-        DashboardPage.Main.verifyEntering();
 
+        var transferPage = dashboardPage.selectCardToTransfer(secondCardInfo);
+        dashboardPage = transferPage.makeValidTransfer(String.valueOf(amount), firstCardInfo);
+        var actualBalanceFirstCard = dashboardPage.getCardBalance(firstCardInfo);
+        var actualBalanceSecondCard = dashboardPage.getCardBalance(secondCardInfo);
 
-        int firstCard = additionalInfo.getRandomInt(2);
-        int secondCard = additionalInfo.getAnotherRandomInt(2, firstCard);
-        int moneyAmount = transferInfo.getMoneyAmount(firstCard, "AboveBalance");
-
-        int[] expected = {
-                DashboardPage.Main.getBalances(firstCard),
-                DashboardPage.Main.getBalances(secondCard)};
-
-        transfer.replenishCard(firstCard).fromCard(firstCard).withMoneyAmount(moneyAmount);
-        DashboardPage.Main.verifyEntering();
-
-        int[] actual = {DashboardPage.Main.getBalances(firstCard), DashboardPage.Main.getBalances(secondCard)};
-
-        Assertions.assertArrayEquals(expected, actual);
+        Assertions.assertEquals(firstCardBalance, actualBalanceFirstCard);
+        Assertions.assertEquals(secondCardBalance, actualBalanceSecondCard);
     }
 
     @Test
-    void shouldNotBeSuccessTransferToSameCardWhenMoneyAmountZero() {
+    void shouldNotBeTransferFromSecondToFirst() {
         var loginPage = new LoginPage();
-        var info = new DataGenerator.AuthInfo();
-        var transferInfo = new DataGenerator.transferInfo();
-        var additionalInfo = new DataGenerator.additionalInfo();
-        var verificationPage = new VerificationPage();
-        var dashboardPage = new DashboardPage();
-        var transfer = dashboardPage.new Transfer();
+        var authInfo = DataGenerator.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataGenerator.getVerificationCode();
+        var dashboardPage = verificationPage.validVerify(verificationCode);
+        var firstCardInfo = getFirstCardInfo();
+        var secondCardInfo = getSecondCardInfo();
+        var firstCardBalance = dashboardPage.getCardBalance(firstCardInfo);
+        var secondCardBalance = dashboardPage.getCardBalance(secondCardInfo);
+        var amount = generateInvalidMoneyAmount(secondCardBalance);
 
-        loginPage.validLogin(info);
-        verificationPage.validVerify(info);
-        DashboardPage.Main.verifyEntering();
+        var transferPage = dashboardPage.selectCardToTransfer(firstCardInfo);
+        dashboardPage = transferPage.makeValidTransfer(String.valueOf(amount), secondCardInfo);
+        var actualBalanceFirstCard = dashboardPage.getCardBalance(firstCardInfo);
+        var actualBalanceSecondCard = dashboardPage.getCardBalance(secondCardInfo);
 
-        int firstCard = additionalInfo.getRandomInt(2);
-        int secondCard = additionalInfo.getAnotherRandomInt(2, firstCard);
-        int moneyAmount = transferInfo.getMoneyAmount(firstCard, "Zero");
-
-        int[] expected = {
-                DashboardPage.Main.getBalances(firstCard),
-                DashboardPage.Main.getBalances(secondCard)};
-
-        transfer.replenishCard(firstCard).fromCard(firstCard).withMoneyAmount(moneyAmount);
-        DashboardPage.Main.verifyEntering();
-
-        int[] actual = {DashboardPage.Main.getBalances(firstCard), DashboardPage.Main.getBalances(secondCard)};
-
-        Assertions.assertArrayEquals(expected, actual);
+        Assertions.assertEquals(firstCardBalance, actualBalanceFirstCard);
+        Assertions.assertEquals(secondCardBalance, actualBalanceSecondCard);
     }
 
     @Test
-    void shouldNotBeSuccessTransferToSameCardWhenMoneyAmountBelowZero() {
+    void shouldNotBeTransferFromFirstToFirst() {
         var loginPage = new LoginPage();
-        var info = new DataGenerator.AuthInfo();
-        var transferInfo = new DataGenerator.transferInfo();
-        var additionalInfo = new DataGenerator.additionalInfo();
-        var verificationPage = new VerificationPage();
-        var dashboardPage = new DashboardPage();
-        var transfer = dashboardPage.new Transfer();
+        var authInfo = DataGenerator.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataGenerator.getVerificationCode();
+        var dashboardPage = verificationPage.validVerify(verificationCode);
+        var firstCardInfo = getFirstCardInfo();
+        var firstCardBalance = dashboardPage.getCardBalance(firstCardInfo);
+        var amount = generateValidMoneyAmount(firstCardBalance);
 
-        loginPage.validLogin(info);
-        verificationPage.validVerify(info);
-        DashboardPage.Main.verifyEntering();
 
-        int firstCard = additionalInfo.getRandomInt(2);
-        int secondCard = additionalInfo.getAnotherRandomInt(2, firstCard);
-        int moneyAmount = transferInfo.getMoneyAmount(firstCard, "BelowZero");
+        var transferPage = dashboardPage.selectCardToTransfer(firstCardInfo);
+        dashboardPage = transferPage.makeValidTransfer(String.valueOf(amount), firstCardInfo);
+        var actualBalanceFirstCard = dashboardPage.getCardBalance(firstCardInfo);
 
-        int[] expected = {
-                DashboardPage.Main.getBalances(firstCard),
-                DashboardPage.Main.getBalances(secondCard)};
+        Assertions.assertEquals(firstCardBalance, actualBalanceFirstCard);
+    }
 
-        transfer.replenishCard(firstCard).fromCard(firstCard).withMoneyAmount(moneyAmount);
-        DashboardPage.Main.verifyEntering();
+    @Test
+    void shouldNotBeTransferFromSecondToSecond() {
+        var loginPage = new LoginPage();
+        var authInfo = DataGenerator.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataGenerator.getVerificationCode();
+        var dashboardPage = verificationPage.validVerify(verificationCode);
+        var secondCardInfo = getSecondCardInfo();
+        var secondCardBalance = dashboardPage.getCardBalance(secondCardInfo);
+        var amount = generateValidMoneyAmount(secondCardBalance);
 
-        int[] actual = {DashboardPage.Main.getBalances(firstCard), DashboardPage.Main.getBalances(secondCard)};
+        var transferPage = dashboardPage.selectCardToTransfer(secondCardInfo);
+        dashboardPage = transferPage.makeValidTransfer(String.valueOf(amount), secondCardInfo);
+        var actualBalanceSecondCard = dashboardPage.getCardBalance(secondCardInfo);
 
-        Assertions.assertArrayEquals(expected, actual);
+        Assertions.assertEquals(secondCardBalance, actualBalanceSecondCard);
+    }
+
+    @Test
+    void shouldNotBeTransferFromNothingToFirst() {
+        var loginPage = new LoginPage();
+        var authInfo = DataGenerator.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataGenerator.getVerificationCode();
+        var dashboardPage = verificationPage.validVerify(verificationCode);
+        var firstCardInfo = getFirstCardInfo();
+        var secondCardInfo = getSecondCardInfo();
+        var firstCardBalance = dashboardPage.getCardBalance(firstCardInfo);
+        var secondCardBalance = dashboardPage.getCardBalance(secondCardInfo);
+        var amount = generateValidMoneyAmount(secondCardBalance);
+
+        var transferPage = dashboardPage.selectCardToTransfer(firstCardInfo);
+        dashboardPage = transferPage.makeInvalidTransfer(String.valueOf(amount), secondCardInfo);
+
+        transferPage.findErrorMessage("Ошибка");
+    }
+
+    @Test
+    void shouldNotBeTransferFromNothingToSecond() {
+        var loginPage = new LoginPage();
+        var authInfo = DataGenerator.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataGenerator.getVerificationCode();
+        var dashboardPage = verificationPage.validVerify(verificationCode);
+        var firstCardInfo = getFirstCardInfo();
+        var secondCardInfo = getSecondCardInfo();
+        var firstCardBalance = dashboardPage.getCardBalance(firstCardInfo);
+        var secondCardBalance = dashboardPage.getCardBalance(secondCardInfo);
+        var amount = generateValidMoneyAmount(secondCardBalance);
+
+        var transferPage = dashboardPage.selectCardToTransfer(secondCardInfo);
+        dashboardPage = transferPage.makeInvalidTransfer(String.valueOf(amount), secondCardInfo);
+
+        transferPage.findErrorMessage("Ошибка");
     }
 
 }

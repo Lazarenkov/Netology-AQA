@@ -10,9 +10,10 @@ public class VerificationPage {
     private SelenideElement code = $("[data-test-id='code'] input");
     private SelenideElement verificationButton = $("[data-test-id=action-verify]");
 
-    public void validVerify(DataGenerator.AuthInfo info){
-        code.setValue(info.getValidCode());
+    public DashboardPage validVerify(DataGenerator.VerificationCode verificationCode) {
+        code.setValue(verificationCode.getCode());
         verificationButton.click();
+        return new DashboardPage();
     }
 
 }
