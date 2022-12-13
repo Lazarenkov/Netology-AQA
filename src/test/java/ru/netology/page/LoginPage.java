@@ -13,16 +13,12 @@ public class LoginPage {
     private SelenideElement passwordField = $("[data-test-id='password'] input");
     private SelenideElement actionButton = $("[data-test-id='action-login'] .button__text");
 
-    private SelenideElement errorNotification = $("[data-test-id='error-notification'] .notification__title");
+    private SelenideElement errorNotificationTitle = $("[data-test-id='error-notification'] .notification__title");
 
-    public LoginPage validLogin(DataHelper.AuthInfo authInfo){
-        loginField.setValue(authInfo.getLogin());
-        passwordField.setValue(authInfo.getPassword());
-        actionButton.click();
-        return new LoginPage();
-    }
+    private SelenideElement errorNotificationContent = $("[data-test-id='error-notification'] .notification__content");
 
-    public LoginPage invalidLogin(String login, String password){
+
+    public LoginPage login(String login, String password){
         loginField.setValue(login);
         passwordField.setValue(password);
         actionButton.click();
@@ -35,8 +31,15 @@ public class LoginPage {
         return new LoginPage();
     }
 
-    public LoginPage verifyErrorNotification(){
-        errorNotification.shouldBe(visible).shouldHave(text("Ошибка"));
+    public LoginPage verifyInvalidLoginErrorNotification(){
+        errorNotificationTitle.shouldBe(visible).shouldHave(text("Ошибка"));
+        errorNotificationContent.shouldHave(text("Неверно указан логин или пароль"));
+        return new LoginPage();
+    }
+
+    public LoginPage verifyBlockingErrorNotification(){
+        errorNotificationTitle.shouldBe(visible);
+        errorNotificationContent.shouldHave(text("блок"));
         return new LoginPage();
     }
 
