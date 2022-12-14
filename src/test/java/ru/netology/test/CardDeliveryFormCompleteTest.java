@@ -1,5 +1,7 @@
 package ru.netology.test;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
 import java.time.Duration;
@@ -10,6 +12,18 @@ import static com.codeborne.selenide.Condition.*;
 
 
 public class CardDeliveryFormCompleteTest {
+
+    @BeforeAll
+    static void setUpAll(){
+        SelenideLogger.addListener("allure", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false));
+    }
+
+    @AfterAll
+    static void tearsDownAll(){
+        SelenideLogger.removeListener("allure");
+    }
 
     @BeforeEach
     void startBrowser() {

@@ -1,7 +1,8 @@
 package ru.netology.test;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
 import ru.netology.data.DataGenerator;
 
@@ -11,6 +12,18 @@ import static com.codeborne.selenide.Condition.*;
 
 
 public class CardDeliveryAgreementTest {
+
+    @BeforeAll
+    static void setUpAll(){
+        SelenideLogger.addListener("allure", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false));
+    }
+
+    @AfterAll
+    static void tearsDownAll(){
+        SelenideLogger.removeListener("allure");
+    }
 
     @BeforeEach
     void startBrowser() {
