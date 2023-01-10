@@ -1,11 +1,10 @@
 version: '3.7'
 services:
-  mysql:
-    image: mysql:8
+  postgres:
+    image: postgres:12
     ports:
-      - "3306:3306"
+      - "5432:5432"
     environment:
-      - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_DATABASE=app
-      - MYSQL_USER=app
-      - MYSQL_PASSWORD=pass
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: app
+      POSTGRES_DB: app
