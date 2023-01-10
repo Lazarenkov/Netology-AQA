@@ -1,6 +1,7 @@
 package test;
 
 import data.DataHelper;
+import data.SQLHelper;
 import dto.Dto;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
@@ -19,10 +20,16 @@ public class AqaShopTest {
     void debugging(){
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        dashboardPage.selectLoanScenario();
+        dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
         dashboardPage.clickContinue();
         dashboardPage.validateSuccessNotification();
+    }
+
+    @Test
+    void sqlDebugging(){
+
+        System.out.println(SQLHelper.getStatusOfLastPayment());
     }
 
 

@@ -21,6 +21,7 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.31'
     implementation 'commons-dbutils:commons-dbutils:1.7'
     testImplementation 'com.codeborne:selenide:6.9.0'
+    implementation 'org.postgresql:postgresql:42.5.1'
 }
 
 test {
