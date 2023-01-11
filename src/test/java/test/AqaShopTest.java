@@ -32,6 +32,11 @@ public class AqaShopTest {
         System.out.println(SQLHelper.getStatusOfLastPayment());
     }
 
+    @Test
+    void helperDebugging(){
+        System.out.println(DataHelper.getRandomCode(30));
+    }
+
 
 
 

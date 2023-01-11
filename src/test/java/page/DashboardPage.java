@@ -3,6 +3,7 @@ package page;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import dto.Dto;
+import org.openqa.selenium.Keys;
 
 import java.time.Duration;
 
@@ -32,6 +33,8 @@ public class DashboardPage {
     private ElementsCollection notificationPopup = $$(".notification");
 
 
+    public String clearField = Keys.chord(Keys.CONTROL, "a") + Keys.DELETE;
+
     public DashboardPage verifyEntering() {
         heading.shouldBe(visible);
         heading.shouldHave(text("Путешествие дня"));
@@ -46,7 +49,6 @@ public class DashboardPage {
         cardHolderNameField.find(".input__control").setValue(user.getCardHolderName());
         return new DashboardPage();
     }
-
 
     public DashboardPage selectPurchasingScenario() {
         buyButton.click();
@@ -63,37 +65,37 @@ public class DashboardPage {
         return new DashboardPage();
     }
 
-
     public DashboardPage validateCardNumberField(String number) {
-        cardNumberField.find(".input__control").setValue(number);
+        cardNumberField.find(".input__control").setValue(clearField).setValue(number);
         clickContinue();
         cardNumberField.find(".input__sub").shouldBe(visible);
         return new DashboardPage();
     }
 
     public DashboardPage validateCardExpireMonthField(String month) {
-        cardExpireMonthField.find(".input__control").setValue(month);
+        cardExpireMonthField.find(".input__control").setValue(clearField).setValue(month);
         clickContinue();
         cardExpireMonthField.find(".input__sub").shouldBe(visible);
         return new DashboardPage();
     }
 
     public DashboardPage validateCardExpireYearField(String year) {
-        cardExpireYearField.find(".input__control").setValue(year);
+        cardExpireYearField.find(".input__control").setValue(clearField).setValue(year);
         clickContinue();
         cardExpireYearField.find(".input__sub").shouldBe(visible);
         return new DashboardPage();
     }
 
     public DashboardPage validateCardHolderNameField(String cardHolderName) {
-        cardHolderNameField.find(".input__control").setValue(cardHolderName);
+        SelenideElement element = cardHolderNameField;
+        element.find(".input__control").setValue(clearField).setValue(cardHolderName);
         clickContinue();
-        cardHolderNameField.find(".input__sub").shouldBe(visible);
+        validateErrorSub(element);
         return new DashboardPage();
     }
 
-    public DashboardPage validateCVVCodeField(int code) {
-        cvvCodeField.find(".input__control").setValue(String.valueOf(code));
+    public DashboardPage validateCVVCodeField(String code) {
+        cvvCodeField.find(".input__control").setValue(clearField).setValue(code);
         clickContinue();
         cvvCodeField.find(".input__sub").shouldBe(visible);
         return new DashboardPage();
@@ -106,6 +108,11 @@ public class DashboardPage {
 
     public DashboardPage validateSuccessNotification() {
         notificationPopup.findBy(text("Успешно")).shouldBe(visible, Duration.ofSeconds(10));
+        return new DashboardPage();
+    }
+
+    public DashboardPage validateErrorSub(SelenideElement element) {
+        element.find(".input__sub").shouldBe(visible);
         return new DashboardPage();
     }
 

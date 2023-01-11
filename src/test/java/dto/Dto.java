@@ -14,6 +14,6 @@ public class Dto {
         String cardExpireMonth;
         String cardExpireYear;
         String cardHolderName;
-        int cvvCode;
+        String cvvCode;
     }
 }
