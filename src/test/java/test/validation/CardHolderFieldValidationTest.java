@@ -1,5 +1,7 @@
 package test.validation;
 
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import data.DataHelper;
 import dto.Dto;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,41 +21,97 @@ public class CardHolderFieldValidationTest {
     void shouldPrintSubWhenCardHolderFieldIsEmpty() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardHolderNameField");
+        String value = "";
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardHolderNameField("");
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
     }
 
     @Test
-    void shouldPrintSubWhenCardHolderFiledWithRussianLetters() {
+    void shouldPrintSubWhenCardHolderNameIsRussian() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardHolderNameField");
+        String value = DataHelper.getRandomRussianName();
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardHolderNameField(DataHelper.getRandomRussianName());
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
     }
 
     @Test
-    void shouldPrintSubWhenCardHolderNameOfOneWord() {
+    void shouldPrintSubWhenCardHolderNameIs1Word() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardHolderNameField");
+        String value = DataHelper.getRandomEnglishName();
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardHolderNameField(DataHelper.getRandomEnglishFirstName());
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateSuccessNotification();
     }
 
     @Test
-    void shouldBeSuccessTransactionWhenCardHolderNameWithHyphens() {
+    void shouldPrintSubWhenCardHolderNameWithHyphens() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        dashboardPage.selectPurchasingScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardHolderNameField(DataHelper
-                .getRandomEnglishFirstName()
+        SelenideElement element = dashboardPage.getPageElement("cardHolderNameField");
+        String value = DataHelper.getRandomEnglishFirstName()
                 + " "
                 + DataHelper.getRandomEnglishFirstName()
                 + "-"
-                + DataHelper.getRandomEnglishFirstName());
+                + DataHelper.getRandomEnglishFirstName();
 
+        dashboardPage.selectPurchasingScenario();
+        dashboardPage.fillAllCardFields(user);
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateSuccessNotification();
     }
+
+    @Test
+    void shouldPrintSubWhenCardHolderNameIsChar() {
+        DashboardPage dashboardPage = new DashboardPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardHolderNameField");
+        String value = DataHelper.getRandomChar();
+
+        dashboardPage.selectPurchasingScenario();
+        dashboardPage.fillAllCardFields(user);
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
+    }
+
+    @Test
+    void shouldPrintSubWhenCardHolderNameIs3Words() {
+        DashboardPage dashboardPage = new DashboardPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardHolderNameField");
+        String value = DataHelper.getRandomEnglishName()
+                + " "
+                + DataHelper.getRandomEnglishFirstName();
+
+        dashboardPage.selectPurchasingScenario();
+        dashboardPage.fillAllCardFields(user);
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateSuccessNotification();
+    }
+
+    @Test
+    void shouldPrintSubWhenCardHolderNameIsDigit() {
+        DashboardPage dashboardPage = new DashboardPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardHolderNameField");
+        String value = DataHelper.getRandomCode(1);
+
+        dashboardPage.selectPurchasingScenario();
+        dashboardPage.fillAllCardFields(user);
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
+    }
+
 }

@@ -1,7 +1,9 @@
 package test.validation;
 
+import com.codeborne.selenide.SelenideElement;
 import data.DataHelper;
 import dto.Dto;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import page.DashboardPage;
@@ -16,57 +18,100 @@ public class YearFieldValidationTest {
     }
 
     @Test
-    void shouldPrintSubWhenYearFieldIsEmpty(){
+    void shouldPrintSubWhenYearFieldIsEmpty() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireYearField");
+        String value = "";
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardExpireYearField("");
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
     }
 
     @Test
-    void shouldPrintSubWhenYearFieldWith1Digit(){
+    void shouldPrintSubWhenYearFieldWith1Digit() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireYearField");
+        String value = String.valueOf(DataHelper.getRandomInt(8, 1));
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardExpireYearField(String.valueOf(DataHelper.getRandomInt(8,1)));
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
     }
 
     @Test
-    void shouldPrintSubWhenYearFieldWithChar(){
+    void shouldPrintSubWhenYearFieldWithChar() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireYearField");
+        String value = DataHelper.getRandomChar();
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardExpireYearField(DataHelper.getRandomChar());
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
     }
 
     @Test
-    void shouldPrintSubWhenYearFieldWithEnglishLetter(){
+    void shouldPrintSubWhenYearFieldWithEnglishLetter() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireYearField");
+        String value = DataHelper.getRandomEnglishLetter();
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardExpireYearField(DataHelper.getRandomEnglishLetter());
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
     }
 
     @Test
-    void shouldPrintSubWhenYearFieldWithRussianLetter(){
+    void shouldPrintSubWhenYearFieldWithRussianLetter() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireYearField");
+        String value = DataHelper.getRandomRussianLetter();
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardExpireYearField(DataHelper.getRandomRussianLetter());
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
     }
 
 
     @Test
-    void shouldPrintSubWhenYearIsBelow23(){
+    void shouldPrintSubWhenYearIsBelow23() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireYearField");
+        String value = String.valueOf(DataHelper.getRandomInt(12, 10));
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardExpireYearField(String.valueOf(DataHelper.getRandomInt(12,10)));
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
     }
+
+    @Test
+    void shouldDisplayFirst2DigitsWhenInputValueIsLonger() {
+        DashboardPage dashboardPage = new DashboardPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireYearField");
+        String value = DataHelper.getRandomCode(DataHelper.getRandomInt(83, 16));
+
+        dashboardPage.selectPurchasingScenario();
+        dashboardPage.fillAllCardFields(user);
+        dashboardPage.fillField(element, value).clickContinue();
+
+        String expected
+                = value.substring(0,2);
+
+        String actual = dashboardPage.getFieldValue(element);
+        Assertions.assertEquals(expected, actual);
+    }
+
 }

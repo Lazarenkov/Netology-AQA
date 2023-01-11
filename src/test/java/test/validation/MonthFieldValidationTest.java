@@ -1,7 +1,9 @@
 package test.validation;
 
+import com.codeborne.selenide.SelenideElement;
 import data.DataHelper;
 import dto.Dto;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import page.DashboardPage;
@@ -16,65 +18,111 @@ public class MonthFieldValidationTest {
     }
 
     @Test
-    void shouldPrintSubWhenMonthFieldIsEmpty(){
+    void shouldPrintSubWhenMonthFieldIsEmpty() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireMonthField");
+        String value = "";
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardExpireMonthField("");
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
     }
 
     @Test
-    void shouldPrintSubWhenMonthFieldWith1Digit(){
+    void shouldPrintSubWhenMonthFieldWith1Digit() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireMonthField");
+        String value = String.valueOf(DataHelper.getRandomInt(8, 1));
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardExpireMonthField(String.valueOf(DataHelper.getRandomInt(8,1)));
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
     }
 
     @Test
-    void shouldPrintSubWhenMonthFieldWithChar(){
+    void shouldPrintSubWhenMonthFieldWithChar() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireMonthField");
+        String value = DataHelper.getRandomChar();
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardExpireMonthField(DataHelper.getRandomChar());
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
     }
 
     @Test
-    void shouldPrintSubWhenMonthFieldWithEnglishLetter(){
+    void shouldPrintSubWhenMonthFieldWithEnglishLetter() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireMonthField");
+        String value = DataHelper.getRandomEnglishLetter();
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardExpireMonthField(DataHelper.getRandomEnglishLetter());
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
     }
 
     @Test
-    void shouldPrintSubWhenMonthFieldWithRussianLetter(){
+    void shouldPrintSubWhenMonthFieldWithRussianLetter() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireMonthField");
+        String value = DataHelper.getRandomRussianLetter();
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardExpireMonthField(DataHelper.getRandomRussianLetter());
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
     }
 
     @Test
-    void shouldPrintSubWhenMonthIs00(){
+    void shouldPrintSubWhenMonthIs00() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireMonthField");
+        String value = "00";
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardExpireMonthField("00");
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
     }
 
     @Test
-    void shouldPrintSubWhenMonthIsAbove12(){
+    void shouldPrintSubWhenMonthIsAbove12() {
         DashboardPage dashboardPage = new DashboardPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireMonthField");
+        String value = String.valueOf(DataHelper.getRandomInt(87, 13));
+
         dashboardPage.selectPurchasingScenario();
         dashboardPage.fillAllCardFields(user);
-        dashboardPage.validateCardExpireMonthField(String.valueOf(DataHelper.getRandomInt(86,13)));
+        dashboardPage.fillField(element, value).clickContinue();
+        dashboardPage.validateErrorSub(element);
+    }
+
+    @Test
+    void shouldDisplayFirst2DigitsWhenInputValueIsLonger() {
+        DashboardPage dashboardPage = new DashboardPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = dashboardPage.getPageElement("cardExpireMonthField");
+        String value = DataHelper.getRandomCode(DataHelper.getRandomInt(83, 16));
+
+        dashboardPage.selectPurchasingScenario();
+        dashboardPage.fillAllCardFields(user);
+        dashboardPage.fillField(element, value).clickContinue();
+
+        String expected
+                = value.substring(0,2);
+
+        String actual = dashboardPage.getFieldValue(element);
+        Assertions.assertEquals(expected, actual);
     }
 }
