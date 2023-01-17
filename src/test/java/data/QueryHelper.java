@@ -3,12 +3,16 @@ package data;
 import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.junit.jupiter.api.Assertions;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class SQLHelper {
+public class QueryHelper {
+
+    private QueryHelper() {
+    }
 
     static QueryRunner runner = new QueryRunner();
 
@@ -28,7 +32,7 @@ public class SQLHelper {
     }
 
     @SneakyThrows
-    public static String getStatusOfLastCreditRequest() {
+    public static String getStatusOfLastLoanRequest() {
         String query = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
         String result;
         try (var conn = connectToDB()) {
@@ -38,13 +42,33 @@ public class SQLHelper {
     }
 
     @SneakyThrows
-    public static String getStatusOfLastPayment() {
+    public static String getStatusOfLastPurchaseRequest() {
         String query = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1";
         String result;
         try (var conn = connectToDB()) {
             result = runner.query(conn, query, new ScalarHandler<>());
         }
         return result;
+    }
+
+    public static void checkApprovedStatusOfLastPurchaseRequest() {
+        String result = getStatusOfLastPurchaseRequest();
+        Assertions.assertEquals("APPROVED", result);
+    }
+
+    public static void checkApprovedStatusOfLastLoanRequest() {
+        String result = getStatusOfLastLoanRequest();
+        Assertions.assertEquals("APPROVED", result);
+    }
+
+    public static void checkDeclinedStatusOfLastPurchaseRequest() {
+        String result = getStatusOfLastPurchaseRequest();
+        Assertions.assertEquals("DECLINED", result);
+    }
+
+    public static void checkDeclinedStatusOfLastLoanRequest() {
+        String result = getStatusOfLastLoanRequest();
+        Assertions.assertEquals("DECLINED", result);
     }
 
 

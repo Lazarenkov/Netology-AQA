@@ -16,4 +16,14 @@ public class Dto {
         String cardHolderName;
         String cvvCode;
     }
+
+    @Value
+    public static class Request {
+        String number;
+        String year;
+        String month;
+        String cvc;
+        String holder;
+    }
+
 }

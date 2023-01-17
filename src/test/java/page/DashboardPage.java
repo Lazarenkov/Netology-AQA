@@ -57,14 +57,14 @@ public class DashboardPage {
         return new DashboardPage();
     }
 
-    public DashboardPage fillField(SelenideElement element, String value){
+    public DashboardPage fillField(SelenideElement element, String value) {
         element.find(".input__control").setValue(clearField).setValue(value);
         return new DashboardPage();
     }
 
-    public SelenideElement getPageElement(String elementName){
+    public SelenideElement getPageElement(String elementName) {
 
-        switch (elementName){
+        switch (elementName) {
             case "cardNumberField":
                 return cardNumberField;
             case "cardExpireMonthField":
@@ -76,10 +76,10 @@ public class DashboardPage {
             case "cvvCodeField":
                 return cvvCodeField;
         }
-    return null;
+        return null;
     }
 
-    public String getFieldValue(SelenideElement element){
+    public String getFieldValue(SelenideElement element) {
         return element.find(".input__control").getValue();
     }
 
