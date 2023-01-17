@@ -6,4 +6,4 @@ target
 *.iml
 *.txt
 build/
-.xlsx
+*.xlsx
