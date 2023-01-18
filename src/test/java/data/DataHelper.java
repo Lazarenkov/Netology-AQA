@@ -35,9 +35,9 @@ public class DataHelper {
     }
 
     public static Dto.User getValidUnregisteredUserData() {
-        String cardNumber = fakerEN.finance().creditCard();
+        String cardNumber = fakerEN.finance().creditCard()+getRandomCode(2);
         String cardExpireMonth = LocalDate.now().plusDays(new Random().nextInt(365)).format(DateTimeFormatter.ofPattern("MM"));
-        String cardExpireYear = String.valueOf(new Random().nextInt(10) + 23);
+        String cardExpireYear = String.valueOf(new Random().nextInt(5) + 23);
         String cardHolderName = fakerEN.name().fullName();
         String cvvCode = getRandomCode(3);
         return new Dto.User(cardNumber, cardExpireMonth, cardExpireYear, cardHolderName, cvvCode);

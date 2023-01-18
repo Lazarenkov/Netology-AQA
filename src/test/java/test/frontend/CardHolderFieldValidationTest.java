@@ -2,8 +2,12 @@ package test.frontend;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataHelper;
 import dto.Dto;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import page.DashboardPage;
@@ -11,6 +15,18 @@ import page.DashboardPage;
 import static com.codeborne.selenide.Selenide.open;
 
 public class CardHolderFieldValidationTest {
+
+    @BeforeAll
+    static void setUpAll(){
+        SelenideLogger.addListener("allure", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false));
+    }
+
+    @AfterAll
+    static void tearsDownAll(){
+        SelenideLogger.removeListener("allure");
+    }
 
     @BeforeEach
     void startBrowser() {

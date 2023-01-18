@@ -1,14 +1,28 @@
 package test.frontend;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataHelper;
 import dto.Dto;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 import page.DashboardPage;
 
 import static com.codeborne.selenide.Selenide.open;
 
 public class AqaShopScenariosTest {
+
+    @BeforeAll
+    static void setUpAll(){
+        SelenideLogger.addListener("allure", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false));
+    }
+
+    @AfterAll
+    static void tearsDownAll(){
+        SelenideLogger.removeListener("allure");
+    }
+
 
     @BeforeEach
     void startBrowser() {
@@ -67,7 +81,7 @@ public class AqaShopScenariosTest {
 
         dashboardPage.fillAllCardFields(user);
         dashboardPage.clickContinue();
-        dashboardPage.validateSuccessNotification();
+        dashboardPage.validateErrorNotification();
     }
 
     @Test
@@ -78,6 +92,6 @@ public class AqaShopScenariosTest {
 
         dashboardPage.fillAllCardFields(user);
         dashboardPage.clickContinue();
-        dashboardPage.validateSuccessNotification();
+        dashboardPage.validateErrorNotification();
     }
 }
