@@ -9,17 +9,12 @@
 1. Открыть скачанную папку проекта в IntelliJ IDEa
 1. Открыть терминал IntelliJ IDEa
 1. Последовательно выполнить в терминале команды:
-* `cd ./gate-simalutor`
-* `docker build . -t gate-simulator/node-web-app`
-* `cd ..`
-* `docker run -p 9999:9999 -d gate-simulator/node-web-app`
 * `docker-compose up`
 * *Открыть соседнюю вкладку терминала, т.к. текущая будет занята*
 * `java -jar ./artifacts/aqa-shop.jar -port=8080`
 ### При последующих пусках:
 1. Открыть папку проекта в IntelliJ IDEa
-1. Последовательно выполнить в консоли команды:
-* `docker run -p 9999:9999 -d gate-simulator/node-web-app`
+1. Последовательно выполнить в терминале команды:
 * `docker-compose up`
 * *В соседней вкладке терминала* `java -jar ./artifacts/aqa-shop.jar -port=8080`
 
