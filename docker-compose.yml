@@ -8,3 +8,18 @@ services:
       POSTGRES_PASSWORD: pass
       POSTGRES_USER: app
       POSTGRES_DB: app
+
+  mysql:
+      image: mysql:8
+      ports:
+        - "3306:3306"
+      environment:
+        - MYSQL_RANDOM_ROOT_PASSWORD=yes
+        - MYSQL_DATABASE=app
+        - MYSQL_USER=app
+        - MYSQL_PASSWORD=pass
+
+  node-web-app:
+    build: ./gate-simulator
+    ports:
+      - "9999:9999"
