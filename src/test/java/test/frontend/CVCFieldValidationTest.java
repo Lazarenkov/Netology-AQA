@@ -6,6 +6,7 @@ import data.DataHelper;
 import dto.Dto;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
+import page.CardFormPage;
 import page.DashboardPage;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -32,83 +33,89 @@ public class CVCFieldValidationTest {
     @Test
     void shouldPrintSubWhenPurchasingAndCVCFieldIsEmpty() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cvvCodeField");
+        SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = "";
 
         dashboardPage.selectPurchasingScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenPurchasingAndCVCShorterThen3Digits() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cvvCodeField");
+        SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomCode(DataHelper.getRandomInt(1, 1));
 
         dashboardPage.selectPurchasingScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenPurchasingAndCVCIsChar() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cvvCodeField");
+        SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomChar();
 
         dashboardPage.selectPurchasingScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenPurchasingAndCVCIsEnglishLetter() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cvvCodeField");
+        SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomEnglishLetter();
 
         dashboardPage.selectPurchasingScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenPurchasingAndCVCIsRussianLetter() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cvvCodeField");
+        SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomRussianLetter();
 
         dashboardPage.selectPurchasingScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldDisplayFirst3DigitsWhenPurchasingAndCVCIsLonger() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cvvCodeField");
+        SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomCode(DataHelper.getRandomInt(83, 16));
 
         dashboardPage.selectPurchasingScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
 
         String expected
                 = value.substring(0,3);
 
-        String actual = dashboardPage.getFieldValue(element);
+        String actual = cardFormPage.getFieldValue(element);
         Assertions.assertEquals(expected, actual);
     }
 
@@ -119,83 +126,89 @@ public class CVCFieldValidationTest {
     @Test
     void shouldPrintSubWhenLoanAndCVCFieldIsEmpty() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cvvCodeField");
+        SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = "";
 
         dashboardPage.selectLoanScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenLoanAndCVCShorterThen3Digits() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cvvCodeField");
+        SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomCode(DataHelper.getRandomInt(1, 1));
 
         dashboardPage.selectLoanScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenLoanAndCVCIsChar() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cvvCodeField");
+        SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomChar();
 
         dashboardPage.selectLoanScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenLoanAndCVCIsEnglishLetter() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cvvCodeField");
+        SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomEnglishLetter();
 
         dashboardPage.selectLoanScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenLoanAndCVCIsRussianLetter() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cvvCodeField");
+        SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomRussianLetter();
 
         dashboardPage.selectLoanScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldDisplayFirst3DigitsWhenLoanAndCVCIsLonger() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cvvCodeField");
+        SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomCode(DataHelper.getRandomInt(83, 16));
 
         dashboardPage.selectLoanScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
 
         String expected
                 = value.substring(0,3);
 
-        String actual = dashboardPage.getFieldValue(element);
+        String actual = cardFormPage.getFieldValue(element);
         Assertions.assertEquals(expected, actual);
     }
 

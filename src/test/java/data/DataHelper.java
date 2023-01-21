@@ -94,11 +94,7 @@ public class DataHelper {
     }
 
     public static String getRandomCode(int length) {
-        String target = "";
-        for (int i = 0; i < length; i++) {
-            target = target + fakerEN.numerify("#");
-        }
-        return target;
+        return fakerEN.number().digits(length);
     }
 
     public static String getRandomEnglishName() {

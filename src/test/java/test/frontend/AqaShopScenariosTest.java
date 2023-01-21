@@ -5,6 +5,7 @@ import data.DataHelper;
 import dto.Dto;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
+import page.CardFormPage;
 import page.DashboardPage;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -32,66 +33,72 @@ public class AqaShopScenariosTest {
     @Test
     void shouldBeSuccessNotificationWhenPurchasingWithRegisteredCard() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
         dashboardPage.selectPurchasingScenario();
 
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.clickContinue();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.clickContinue();
         dashboardPage.validateSuccessNotification();
     }
 
     @Test
     void shouldBeSuccessNotificationWhenLoanWithRegisteredCard() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
         dashboardPage.selectLoanScenario();
 
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.clickContinue();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.clickContinue();
         dashboardPage.validateSuccessNotification();
     }
 
     @Test
     void shouldBeErrorNotificationWhenPurchasingWithDeclinedCard() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidDeclinedUserData();
         dashboardPage.selectPurchasingScenario();
 
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.clickContinue();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.clickContinue();
         dashboardPage.validateSuccessNotification();
     }
 
     @Test
     void shouldBeErrorNotificationWhenLoanWithDeclinedCard() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidDeclinedUserData();
         dashboardPage.selectLoanScenario();
 
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.clickContinue();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.clickContinue();
         dashboardPage.validateSuccessNotification();
     }
 
     @Test
     void shouldBeErrorNotificationWhenPurchasingWithUnregisteredCard() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidUnregisteredUserData();
         dashboardPage.selectPurchasingScenario();
 
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.clickContinue();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.clickContinue();
         dashboardPage.validateErrorNotification();
     }
 
     @Test
     void shouldBeErrorNotificationWhenLoanWithUnregisteredCard() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidUnregisteredUserData();
         dashboardPage.selectLoanScenario();
 
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.clickContinue();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.clickContinue();
         dashboardPage.validateErrorNotification();
     }
 }

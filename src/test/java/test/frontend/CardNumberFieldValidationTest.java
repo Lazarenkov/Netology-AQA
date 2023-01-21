@@ -6,6 +6,7 @@ import data.DataHelper;
 import dto.Dto;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
+import page.CardFormPage;
 import page.DashboardPage;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -32,78 +33,84 @@ public class CardNumberFieldValidationTest {
     @Test
     void shouldPrintSubWhenPurchasingAndCardNumberFieldIsEmpty() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cardNumberField");
+        SelenideElement element = cardFormPage.getPageElement("cardNumberField");
         String value = "";
 
         dashboardPage.selectPurchasingScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenPurchasingAndCardNumberFieldWithChar() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cardNumberField");
+        SelenideElement element = cardFormPage.getPageElement("cardNumberField");
         String value = DataHelper.getRandomChar();
 
         dashboardPage.selectPurchasingScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenPurchasingAndCardNumberFieldWithEnglishLetter() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cardNumberField");
+        SelenideElement element = cardFormPage.getPageElement("cardNumberField");
         String value = DataHelper.getRandomEnglishLetter();
 
         dashboardPage.selectPurchasingScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenPurchasingAndCardNumberFieldWithRussianLetter() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cardNumberField");
+        SelenideElement element = cardFormPage.getPageElement("cardNumberField");
         String value = DataHelper.getRandomRussianLetter();
 
         dashboardPage.selectPurchasingScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenPurchasingAndCardNumberShorter16digits() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cardNumberField");
+        SelenideElement element = cardFormPage.getPageElement("cardNumberField");
         String value = DataHelper.getRandomCode(DataHelper.getRandomInt(14, 1));
 
         dashboardPage.selectPurchasingScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldDisplayFirst16DigitsWhenPurchasingAndCardNumberIsLonger() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cardNumberField");
+        SelenideElement element = cardFormPage.getPageElement("cardNumberField");
         String value = DataHelper.getRandomCode(DataHelper.getRandomInt(83, 16));
 
         dashboardPage.selectPurchasingScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
 
         String expected
                 = value.substring(0,4)
@@ -114,89 +121,95 @@ public class CardNumberFieldValidationTest {
                 + " "
                 + value.substring(12,16);
 
-        String actual = dashboardPage.getFieldValue(element);
+        String actual = cardFormPage.getFieldValue(element);
         Assertions.assertEquals(expected, actual);
     }
 
 
-    
-    
-    
+
+
+
     @Test
     void shouldPrintSubWhenLoanAndCardNumberFieldIsEmpty() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cardNumberField");
+        SelenideElement element = cardFormPage.getPageElement("cardNumberField");
         String value = "";
 
         dashboardPage.selectLoanScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenLoanAndCardNumberFieldWithChar() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cardNumberField");
+        SelenideElement element = cardFormPage.getPageElement("cardNumberField");
         String value = DataHelper.getRandomChar();
 
         dashboardPage.selectLoanScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenLoanAndCardNumberFieldWithEnglishLetter() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cardNumberField");
+        SelenideElement element = cardFormPage.getPageElement("cardNumberField");
         String value = DataHelper.getRandomEnglishLetter();
 
         dashboardPage.selectLoanScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenLoanAndCardNumberFieldWithRussianLetter() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cardNumberField");
+        SelenideElement element = cardFormPage.getPageElement("cardNumberField");
         String value = DataHelper.getRandomRussianLetter();
 
         dashboardPage.selectLoanScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldPrintSubWhenLoanAndCardNumberShorter16digits() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cardNumberField");
+        SelenideElement element = cardFormPage.getPageElement("cardNumberField");
         String value = DataHelper.getRandomCode(DataHelper.getRandomInt(14, 1));
 
         dashboardPage.selectLoanScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
-        dashboardPage.validateErrorSub(element);
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        cardFormPage.validateErrorSub(element);
     }
 
     @Test
     void shouldDisplayFirst16DigitsWhenLoanAndCardNumberIsLonger() {
         DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
-        SelenideElement element = dashboardPage.getPageElement("cardNumberField");
+        SelenideElement element = cardFormPage.getPageElement("cardNumberField");
         String value = DataHelper.getRandomCode(DataHelper.getRandomInt(83, 16));
 
         dashboardPage.selectLoanScenario();
-        dashboardPage.fillAllCardFields(user);
-        dashboardPage.fillField(element, value).clickContinue();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
 
         String expected
                 = value.substring(0,4)
@@ -207,7 +220,7 @@ public class CardNumberFieldValidationTest {
                 + " "
                 + value.substring(12,16);
 
-        String actual = dashboardPage.getFieldValue(element);
+        String actual = cardFormPage.getFieldValue(element);
         Assertions.assertEquals(expected, actual);
     }
 
