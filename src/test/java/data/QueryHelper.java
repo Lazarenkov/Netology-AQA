@@ -15,17 +15,33 @@ public class QueryHelper {
     }
 
     static QueryRunner runner = new QueryRunner();
+    static Connection connection = null;
 
-    private static Connection connectToDB() throws SQLException {
+    public static void selectPostgreSQLDB() throws SQLException {
+        connection = connectToPostgres();
+    }
+
+    public static void selectMySQLDB() throws SQLException {
+        connection = connectToMySQL();
+    }
+
+    private static Connection connectToPostgres() throws SQLException {
         return DriverManager.getConnection
                 ("jdbc:postgresql://localhost:5432/app",
                         "app",
                         "pass");
     }
 
+    private static Connection connectToMySQL() throws SQLException {
+        return DriverManager.getConnection
+                ("jdbc:mysql://localhost:3306/app",
+                        "app",
+                        "pass");
+    }
+
     @SneakyThrows
     public static void cleanDB() {
-        var conn = connectToDB();
+        var conn = connection;
         runner.execute(conn, "DELETE * FROM credit_request_entity");
         runner.execute(conn, "DELETE * FROM order_entity");
         runner.execute(conn, "DELETE * FROM payment_entity");
@@ -35,7 +51,7 @@ public class QueryHelper {
     public static String getStatusOfLastLoanRequest() {
         String query = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
         String result;
-        try (var conn = connectToDB()) {
+        try (var conn = connection) {
             result = runner.query(conn, query, new ScalarHandler<>());
         }
         return result;
@@ -45,7 +61,7 @@ public class QueryHelper {
     public static String getStatusOfLastPurchaseRequest() {
         String query = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1";
         String result;
-        try (var conn = connectToDB()) {
+        try (var conn = connection) {
             result = runner.query(conn, query, new ScalarHandler<>());
         }
         return result;

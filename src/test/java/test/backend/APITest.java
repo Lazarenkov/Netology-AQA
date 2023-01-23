@@ -5,14 +5,29 @@ import data.RequestHelper;
 import data.QueryHelper;
 import dto.Dto;
 import io.restassured.specification.ResponseSpecification;
+import lombok.SneakyThrows;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.sql.Connection;
 
 public class APITest {
 
+
+    @BeforeEach
+    @SneakyThrows
+    void selectDB(){
+        QueryHelper.selectMySQLDB();
+    }
+
+
+    @SneakyThrows
     @Test
     void shouldBeApproveResponseWhenPurchasingWithApprovedCard() {
         Dto.Request request = DataHelper.getValidApprovedUserDataRequest();
         ResponseSpecification response = RequestHelper.setApprovedResponse();
+
 
         RequestHelper.sendPurchaseRequest(request, response);
 
@@ -23,6 +38,7 @@ public class APITest {
     void shouldBeApproveResponseWhenLoanWithApprovedCard() {
         Dto.Request request = DataHelper.getValidApprovedUserDataRequest();
         ResponseSpecification response = RequestHelper.setApprovedResponse();
+
 
         RequestHelper.sendLoanRequest(request, response);
 
