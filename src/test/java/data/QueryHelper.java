@@ -17,23 +17,15 @@ public class QueryHelper {
     static QueryRunner runner = new QueryRunner();
     static Connection connection = null;
 
-    public static void selectPostgreSQLDB() throws SQLException {
-        connection = connectToPostgres();
-    }
-
-    public static void selectMySQLDB() throws SQLException {
-        connection = connectToMySQL();
-    }
-
-    private static Connection connectToPostgres() throws SQLException {
-        return DriverManager.getConnection
+    public static void connectToPostgres() throws SQLException {
+        connection = DriverManager.getConnection
                 ("jdbc:postgresql://localhost:5432/app",
                         "app",
                         "pass");
     }
 
-    private static Connection connectToMySQL() throws SQLException {
-        return DriverManager.getConnection
+    public static void connectToMySQL() throws SQLException {
+        connection = DriverManager.getConnection
                 ("jdbc:mysql://localhost:3306/app",
                         "app",
                         "pass");
