@@ -69,4 +69,15 @@ public class CardFormPage {
         return this;
     }
 
+    public CardFormPage validateErrorSubAbsence(SelenideElement element) {
+        element.find(".input__sub").shouldNotBe(visible);
+        return this;
+    }
+
+    public int getSubsNumber() {
+        return $$(".input__sub").size();
+    }
+
+
+
 }

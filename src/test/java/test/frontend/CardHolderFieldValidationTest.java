@@ -6,10 +6,7 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataHelper;
 import dto.Dto;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import page.CardFormPage;
 import page.DashboardPage;
 
@@ -138,6 +135,21 @@ public class CardHolderFieldValidationTest {
         cardFormPage.validateErrorSub(element);
     }
 
+    @Test
+    void shouldNotPrintAnotherSubWhenPurchasingAndInvalidCardHolder(){
+        DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = cardFormPage.getPageElement("cardHolderNameField");
+        String value = "";
+
+        dashboardPage.selectPurchasingScenario();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        int actual = cardFormPage.getSubsNumber();
+        Assertions.assertEquals(1, actual);
+    }
+
 
 
 
@@ -244,6 +256,21 @@ public class CardHolderFieldValidationTest {
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
         cardFormPage.validateErrorSub(element);
+    }
+
+    @Test
+    void shouldNotPrintAnotherSubWhenLoanAndInvalidCardHolder(){
+        DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = cardFormPage.getPageElement("cardHolderNameField");
+        String value = "";
+
+        dashboardPage.selectLoanScenario();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        int actual = cardFormPage.getSubsNumber();
+        Assertions.assertEquals(1, actual);
     }
 
 }

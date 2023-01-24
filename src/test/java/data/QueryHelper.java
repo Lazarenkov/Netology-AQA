@@ -34,9 +34,9 @@ public class QueryHelper {
     @SneakyThrows
     public static void cleanDB() {
         var conn = connection;
-        runner.execute(conn, "DELETE * FROM credit_request_entity");
-        runner.execute(conn, "DELETE * FROM order_entity");
-        runner.execute(conn, "DELETE * FROM payment_entity");
+        runner.execute(conn, "DELETE FROM credit_request_entity");
+        runner.execute(conn, "DELETE FROM order_entity");
+        runner.execute(conn, "DELETE FROM payment_entity");
     }
 
     @SneakyThrows

@@ -119,6 +119,21 @@ public class CVCFieldValidationTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Test
+    void shouldNotPrintAnotherSubWhenPurchasingAndInvalidCVC(){
+        DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
+        String value = "";
+
+        dashboardPage.selectPurchasingScenario();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        int actual = cardFormPage.getSubsNumber();
+        Assertions.assertEquals(1, actual);
+    }
+
 
 
 
@@ -210,6 +225,21 @@ public class CVCFieldValidationTest {
 
         String actual = cardFormPage.getFieldValue(element);
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldNotPrintAnotherSubWhenLoanAndInvalidCVC(){
+        DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
+        String value = "";
+
+        dashboardPage.selectLoanScenario();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        int actual = cardFormPage.getSubsNumber();
+        Assertions.assertEquals(1, actual);
     }
 
 }

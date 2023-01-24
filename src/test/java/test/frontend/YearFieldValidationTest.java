@@ -100,7 +100,6 @@ public class YearFieldValidationTest {
         cardFormPage.validateErrorSub(element);
     }
 
-
     @Test
     void shouldPrintSubWhenPurchasingAndYearIsBelow23() {
         DashboardPage dashboardPage = new DashboardPage();
@@ -133,6 +132,29 @@ public class YearFieldValidationTest {
         String actual = cardFormPage.getFieldValue(element);
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    void shouldNotPrintAnotherSubWhenPurchasingAndInvalidYear(){
+        DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = cardFormPage.getPageElement("cardExpireYearField");
+        String value = "";
+
+        dashboardPage.selectPurchasingScenario();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        int actual = cardFormPage.getSubsNumber();
+        Assertions.assertEquals(1, actual);
+    }
+
+
+
+
+
+
+
+
 
     @Test
     void shouldPrintSubWhenLoanAndYearFieldIsEmpty() {
@@ -236,6 +258,21 @@ public class YearFieldValidationTest {
 
         String actual = cardFormPage.getFieldValue(element);
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldNotPrintAnotherSubWhenLoanAndInvalidYear(){
+        DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = cardFormPage.getPageElement("cardExpireYearField");
+        String value = "";
+
+        dashboardPage.selectLoanScenario();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        int actual = cardFormPage.getSubsNumber();
+        Assertions.assertEquals(1, actual);
     }
 
 }

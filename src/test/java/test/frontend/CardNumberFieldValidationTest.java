@@ -125,6 +125,21 @@ public class CardNumberFieldValidationTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Test
+    void shouldNotPrintAnotherSubWhenPurchasingAndInvalidCardNumber(){
+        DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = cardFormPage.getPageElement("cardNumberField");
+        String value = "";
+
+        dashboardPage.selectPurchasingScenario();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        int actual = cardFormPage.getSubsNumber();
+        Assertions.assertEquals(1, actual);
+    }
+
 
 
 
@@ -222,6 +237,21 @@ public class CardNumberFieldValidationTest {
 
         String actual = cardFormPage.getFieldValue(element);
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldNotPrintAnotherSubWhenLoanAndInvalidCardNumber(){
+        DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = cardFormPage.getPageElement("cardNumberField");
+        String value = "";
+
+        dashboardPage.selectLoanScenario();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        int actual = cardFormPage.getSubsNumber();
+        Assertions.assertEquals(1, actual);
     }
 
 

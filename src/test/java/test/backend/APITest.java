@@ -80,4 +80,5 @@ public class APITest {
 
         RequestHelper.sendLoanRequest(request, response);
     }
+
 }

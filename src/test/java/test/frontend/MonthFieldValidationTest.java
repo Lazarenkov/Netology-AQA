@@ -146,6 +146,26 @@ public class MonthFieldValidationTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Test
+    void shouldNotPrintAnotherSubWhenPurchasingAndInvalidMonth(){
+        DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
+        String value = "";
+
+        dashboardPage.selectPurchasingScenario();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        int actual = cardFormPage.getSubsNumber();
+        Assertions.assertEquals(1, actual);
+    }
+    
+    
+    
+    
+    
+
 
     @Test
     void shouldPrintSubWhenLoanAndMonthFieldIsEmpty() {
@@ -262,5 +282,20 @@ public class MonthFieldValidationTest {
 
         String actual = cardFormPage.getFieldValue(element);
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldNotPrintAnotherSubWhenLoanAndInvalidMonth(){
+        DashboardPage dashboardPage = new DashboardPage();
+        CardFormPage cardFormPage = new CardFormPage();
+        Dto.User user = DataHelper.getValidApprovedUserData();
+        SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
+        String value = "";
+
+        dashboardPage.selectLoanScenario();
+        cardFormPage.fillAllCardFields(user);
+        cardFormPage.fillField(element, value).clickContinue();
+        int actual = cardFormPage.getSubsNumber();
+        Assertions.assertEquals(1, actual);
     }
 }
