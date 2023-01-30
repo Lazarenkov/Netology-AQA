@@ -22,7 +22,7 @@ public class APITest {
     @Test
     void shouldBeApproveResponseWhenPurchasingWithApprovedCard() {
         Dto.Request request = DataHelper.getValidApprovedUserDataRequest();
-        ResponseSpecification response = RequestHelper.setApprovedResponse();
+        ResponseSpecification response = RequestHelper.getApprovedResponseSpec();
         RequestHelper.sendPurchaseRequest(request, response);
         QueryHelper.checkApprovedStatusOfLastPurchaseRequest();
     }
@@ -30,7 +30,7 @@ public class APITest {
     @Test
     void shouldBeApproveResponseWhenLoanWithApprovedCard() {
         Dto.Request request = DataHelper.getValidApprovedUserDataRequest();
-        ResponseSpecification response = RequestHelper.setApprovedResponse();
+        ResponseSpecification response = RequestHelper.getApprovedResponseSpec();
         RequestHelper.sendLoanRequest(request, response);
         QueryHelper.checkApprovedStatusOfLastLoanRequest();
     }
@@ -38,7 +38,7 @@ public class APITest {
     @Test
     void shouldBeDeclineResponseWhenPurchasingWithDeclinedCard() {
         Dto.Request request = DataHelper.getValidDeclinedUserDataRequest();
-        ResponseSpecification response = RequestHelper.setDeclinedResponse();
+        ResponseSpecification response = RequestHelper.getDeclinedResponseSpec();
         RequestHelper.sendPurchaseRequest(request, response);
         QueryHelper.checkDeclinedStatusOfLastPurchaseRequest();
 
@@ -47,7 +47,7 @@ public class APITest {
     @Test
     void shouldBeDeclineResponseWhenLoanWithDeclinedCard() {
         Dto.Request request = DataHelper.getValidDeclinedUserDataRequest();
-        ResponseSpecification response = RequestHelper.setDeclinedResponse();
+        ResponseSpecification response = RequestHelper.getDeclinedResponseSpec();
         RequestHelper.sendLoanRequest(request, response);
         QueryHelper.checkDeclinedStatusOfLastLoanRequest();
     }
@@ -55,7 +55,7 @@ public class APITest {
     @Test
     void shouldBeErrorResponseWhenPurchasingWithUnregisteredCard() {
         Dto.Request request = DataHelper.getValidUnregisteredUserDataRequest();
-        ResponseSpecification response = RequestHelper.setError500Response();
+        ResponseSpecification response = RequestHelper.getError500ResponseSpec();
         RequestHelper.sendPurchaseRequest(request, response);
 
     }
@@ -63,7 +63,7 @@ public class APITest {
     @Test
     void shouldBeErrorResponseWhenLoanWithUnregisteredCard() {
         Dto.Request request = DataHelper.getValidUnregisteredUserDataRequest();
-        ResponseSpecification response = RequestHelper.setError500Response();
+        ResponseSpecification response = RequestHelper.getError500ResponseSpec();
         RequestHelper.sendLoanRequest(request, response);
     }
 

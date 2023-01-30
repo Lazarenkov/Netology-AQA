@@ -13,7 +13,7 @@ public class RequestHelper {
     private RequestHelper() {
     }
 
-    public static ResponseSpecification setApprovedResponse() {
+    public static ResponseSpecification getApprovedResponseSpec() {
         ResponseSpecification responseSpec = new ResponseSpecBuilder()
                 .expectStatusCode(200)
                 .expectBody("status", Matchers.equalTo("APPROVED"))
@@ -21,7 +21,7 @@ public class RequestHelper {
         return responseSpec;
     }
 
-    public static ResponseSpecification setDeclinedResponse() {
+    public static ResponseSpecification getDeclinedResponseSpec() {
         ResponseSpecification responseSpec = new ResponseSpecBuilder()
                 .expectStatusCode(200)
                 .expectBody("status", Matchers.equalTo("DECLINED"))
@@ -29,35 +29,35 @@ public class RequestHelper {
         return responseSpec;
     }
 
-    public static ResponseSpecification setError500Response() {
+    public static ResponseSpecification getError500ResponseSpec() {
         ResponseSpecification responseSpec = new ResponseSpecBuilder()
                 .expectStatusCode(500)
                 .build();
         return responseSpec;
     }
-
-    public static void sendPurchaseRequest(Dto.Request request, ResponseSpecification response) {
+r
+    public static void sendPurchaseRequest(Dto.Request bodyRequest, ResponseSpecification responseSpec) {
         given()
                 .contentType(ContentType.JSON)
-                .body(request)
+                .body(bodyRequest)
                 .baseUri("http://localhost")
                 .port(8080)
         .when()
                 .post("api/v1/pay")
         .then()
-                .spec(response);
+                .spec(responseSpec);
     }
 
-    public static void sendLoanRequest(Dto.Request request, ResponseSpecification response) {
+    public static void sendLoanRequest(Dto.Request bodyRequest, ResponseSpecification responseSpec) {
         given()
                 .contentType(ContentType.JSON)
-                .body(request)
+                .body(bodyRequest)
                 .baseUri("http://localhost")
                 .port(8080)
         .when()
                 .post("api/v1/credit")
         .then()
-                .spec(response);
+                .spec(responseSpec);
     }
 
 }
