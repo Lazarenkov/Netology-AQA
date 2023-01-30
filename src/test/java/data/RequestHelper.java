@@ -35,7 +35,7 @@ public class RequestHelper {
                 .build();
         return responseSpec;
     }
-r
+
     public static void sendPurchaseRequest(Dto.Request bodyRequest, ResponseSpecification responseSpec) {
         given()
                 .contentType(ContentType.JSON)

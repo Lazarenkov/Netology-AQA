@@ -11,12 +11,16 @@
 1. Последовательно выполнить в терминале команды:
 * `docker-compose up`
 * *Открыть соседнюю вкладку терминала, т.к. текущая будет занята*
-* `java -jar ./artifacts/aqa-shop.jar -port=8080`
+
+*  Для запуска SUT с MySQL выполнить `java -jar ./artifacts/aqa-shop.jar -port=8080 -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -Dspring.datasource.username=app -Dspring.datasource.password=pass`
+*  Для запуска SUT с Postgres выполнить `java -jar ./artifacts/aqa-shop.jar -port=8080 -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app -Dspring.datasource.username=app -Dspring.datasource.password=pass`
 ### При последующих пусках:
 1. Открыть папку проекта в IntelliJ IDEa
 1. Последовательно выполнить в терминале команды:
 * `docker-compose up`
-* *В соседней вкладке терминала* `java -jar ./artifacts/aqa-shop.jar -port=8080`
+
+*  Для запуска SUT с MySQL выполнить в соседней вкладке терминала `java -jar ./artifacts/aqa-shop.jar -port=8080 -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -Dspring.datasource.username=app -Dspring.datasource.password=pass`
+*  Для запуска SUT с Postgres выполнить в соседней вкладке терминала `java -jar ./artifacts/aqa-shop.jar -port=8080 -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app -Dspring.datasource.username=app -Dspring.datasource.password=pass`
 
 ---
 Для запуска непосредственно тестов выполнить в еще одном инстансе терминала `./gradlew clean test` или нажать  `Ctrl+Ctrl` и в открывшемся шелле выполнить `gradle clean test`
