@@ -6,17 +6,10 @@ import data.QueryHelper;
 import dto.Dto;
 import io.restassured.specification.ResponseSpecification;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 public class APITest {
-
-    @BeforeEach
-    @SneakyThrows
-    void setDBConnection(){
-        QueryHelper.connectToMySQL();
-    }
 
     @SneakyThrows
     @Test
