@@ -37,7 +37,6 @@ public class CVCFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = "";
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -51,7 +50,6 @@ public class CVCFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomCode(DataHelper.getRandomInt(1, 1));
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -65,7 +63,6 @@ public class CVCFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomChar();
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -79,7 +76,6 @@ public class CVCFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomEnglishLetter();
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -93,7 +89,6 @@ public class CVCFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomRussianLetter();
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -107,14 +102,11 @@ public class CVCFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomCode(DataHelper.getRandomInt(83, 16));
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
-
         String expected
                 = value.substring(0,3);
-
         String actual = cardFormPage.getFieldValue(element);
         Assertions.assertEquals(expected, actual);
     }
@@ -126,16 +118,12 @@ public class CVCFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = "";
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
         int actual = cardFormPage.getSubsNumber();
         Assertions.assertEquals(1, actual);
     }
-
-
-
 
 
     @Test
@@ -145,7 +133,6 @@ public class CVCFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = "";
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -159,7 +146,6 @@ public class CVCFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomCode(DataHelper.getRandomInt(1, 1));
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -173,7 +159,6 @@ public class CVCFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomChar();
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -187,7 +172,6 @@ public class CVCFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomEnglishLetter();
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -201,7 +185,6 @@ public class CVCFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomRussianLetter();
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -215,14 +198,11 @@ public class CVCFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = DataHelper.getRandomCode(DataHelper.getRandomInt(83, 16));
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
-
         String expected
                 = value.substring(0,3);
-
         String actual = cardFormPage.getFieldValue(element);
         Assertions.assertEquals(expected, actual);
     }
@@ -234,7 +214,6 @@ public class CVCFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cvvCodeField");
         String value = "";
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();

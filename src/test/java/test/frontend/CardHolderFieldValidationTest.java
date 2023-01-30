@@ -1,6 +1,5 @@
 package test.frontend;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataHelper;
@@ -38,7 +37,6 @@ public class CardHolderFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardHolderNameField");
         String value = "";
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -52,7 +50,6 @@ public class CardHolderFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardHolderNameField");
         String value = DataHelper.getRandomRussianName();
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -66,7 +63,6 @@ public class CardHolderFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardHolderNameField");
         String value = DataHelper.getRandomEnglishName();
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -84,7 +80,6 @@ public class CardHolderFieldValidationTest {
                 + DataHelper.getRandomEnglishFirstName()
                 + "-"
                 + DataHelper.getRandomEnglishFirstName();
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -98,7 +93,6 @@ public class CardHolderFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardHolderNameField");
         String value = DataHelper.getRandomChar();
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -114,7 +108,6 @@ public class CardHolderFieldValidationTest {
         String value = DataHelper.getRandomEnglishName()
                 + " "
                 + DataHelper.getRandomEnglishFirstName();
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -128,7 +121,6 @@ public class CardHolderFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardHolderNameField");
         String value = DataHelper.getRandomCode(1);
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -142,16 +134,12 @@ public class CardHolderFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardHolderNameField");
         String value = "";
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
         int actual = cardFormPage.getSubsNumber();
         Assertions.assertEquals(1, actual);
     }
-
-
-
 
 
     @Test
@@ -161,7 +149,6 @@ public class CardHolderFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardHolderNameField");
         String value = "";
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -175,7 +162,6 @@ public class CardHolderFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardHolderNameField");
         String value = DataHelper.getRandomRussianName();
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -189,7 +175,6 @@ public class CardHolderFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardHolderNameField");
         String value = DataHelper.getRandomEnglishName();
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -207,7 +192,6 @@ public class CardHolderFieldValidationTest {
                 + DataHelper.getRandomEnglishFirstName()
                 + "-"
                 + DataHelper.getRandomEnglishFirstName();
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -221,7 +205,6 @@ public class CardHolderFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardHolderNameField");
         String value = DataHelper.getRandomChar();
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -237,7 +220,6 @@ public class CardHolderFieldValidationTest {
         String value = DataHelper.getRandomEnglishName()
                 + " "
                 + DataHelper.getRandomEnglishFirstName();
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -251,7 +233,6 @@ public class CardHolderFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardHolderNameField");
         String value = DataHelper.getRandomCode(1);
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -265,7 +246,6 @@ public class CardHolderFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardHolderNameField");
         String value = "";
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();

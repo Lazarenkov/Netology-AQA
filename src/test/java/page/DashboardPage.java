@@ -2,9 +2,6 @@ package page;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import dto.Dto;
-import org.openqa.selenium.Keys;
-
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;

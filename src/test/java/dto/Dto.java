@@ -7,7 +7,6 @@ public class Dto {
     private Dto() {
     }
 
-
     @Value
     public static class User {
         String cardNumber;

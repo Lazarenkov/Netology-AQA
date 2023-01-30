@@ -7,13 +7,11 @@ import io.restassured.specification.ResponseSpecification;
 import org.hamcrest.Matchers;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.responseSpecification;
 
 public class RequestHelper {
 
     private RequestHelper() {
     }
-
 
     public static ResponseSpecification setApprovedResponse() {
         ResponseSpecification responseSpec = new ResponseSpecBuilder()

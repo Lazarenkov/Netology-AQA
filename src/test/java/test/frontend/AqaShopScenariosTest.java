@@ -36,7 +36,6 @@ public class AqaShopScenariosTest {
         CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
         dashboardPage.selectPurchasingScenario();
-
         cardFormPage.fillAllCardFields(user);
         cardFormPage.clickContinue();
         dashboardPage.validateSuccessNotification();
@@ -48,7 +47,6 @@ public class AqaShopScenariosTest {
         CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidApprovedUserData();
         dashboardPage.selectLoanScenario();
-
         cardFormPage.fillAllCardFields(user);
         cardFormPage.clickContinue();
         dashboardPage.validateSuccessNotification();
@@ -60,7 +58,6 @@ public class AqaShopScenariosTest {
         CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidDeclinedUserData();
         dashboardPage.selectPurchasingScenario();
-
         cardFormPage.fillAllCardFields(user);
         cardFormPage.clickContinue();
         dashboardPage.validateSuccessNotification();
@@ -72,7 +69,6 @@ public class AqaShopScenariosTest {
         CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidDeclinedUserData();
         dashboardPage.selectLoanScenario();
-
         cardFormPage.fillAllCardFields(user);
         cardFormPage.clickContinue();
         dashboardPage.validateSuccessNotification();
@@ -84,7 +80,6 @@ public class AqaShopScenariosTest {
         CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidUnregisteredUserData();
         dashboardPage.selectPurchasingScenario();
-
         cardFormPage.fillAllCardFields(user);
         cardFormPage.clickContinue();
         dashboardPage.validateErrorNotification();
@@ -96,7 +91,6 @@ public class AqaShopScenariosTest {
         CardFormPage cardFormPage = new CardFormPage();
         Dto.User user = DataHelper.getValidUnregisteredUserData();
         dashboardPage.selectLoanScenario();
-
         cardFormPage.fillAllCardFields(user);
         cardFormPage.clickContinue();
         dashboardPage.validateErrorNotification();

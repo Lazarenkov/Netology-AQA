@@ -36,7 +36,6 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = "";
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -50,7 +49,6 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = String.valueOf(DataHelper.getRandomInt(8, 1));
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -64,7 +62,6 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = DataHelper.getRandomChar();
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -78,7 +75,6 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = DataHelper.getRandomEnglishLetter();
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -92,7 +88,6 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = DataHelper.getRandomRussianLetter();
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -106,7 +101,6 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = "00";
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -120,7 +114,6 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = String.valueOf(DataHelper.getRandomInt(87, 13));
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -134,14 +127,11 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = DataHelper.getRandomCode(DataHelper.getRandomInt(83, 16));
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
-
         String expected
                 = value.substring(0,2);
-
         String actual = cardFormPage.getFieldValue(element);
         Assertions.assertEquals(expected, actual);
     }
@@ -153,18 +143,12 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = "";
-
         dashboardPage.selectPurchasingScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
         int actual = cardFormPage.getSubsNumber();
         Assertions.assertEquals(1, actual);
     }
-    
-    
-    
-    
-    
 
 
     @Test
@@ -174,7 +158,6 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = "";
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -188,7 +171,6 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = String.valueOf(DataHelper.getRandomInt(8, 1));
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -202,7 +184,6 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = DataHelper.getRandomChar();
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -216,7 +197,6 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = DataHelper.getRandomEnglishLetter();
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -230,7 +210,6 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = DataHelper.getRandomRussianLetter();
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -244,7 +223,6 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = "00";
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -258,7 +236,6 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = String.valueOf(DataHelper.getRandomInt(87, 13));
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
@@ -272,14 +249,11 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = DataHelper.getRandomCode(DataHelper.getRandomInt(83, 16));
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
-
         String expected
                 = value.substring(0,2);
-
         String actual = cardFormPage.getFieldValue(element);
         Assertions.assertEquals(expected, actual);
     }
@@ -291,11 +265,11 @@ public class MonthFieldValidationTest {
         Dto.User user = DataHelper.getValidApprovedUserData();
         SelenideElement element = cardFormPage.getPageElement("cardExpireMonthField");
         String value = "";
-
         dashboardPage.selectLoanScenario();
         cardFormPage.fillAllCardFields(user);
         cardFormPage.fillField(element, value).clickContinue();
         int actual = cardFormPage.getSubsNumber();
         Assertions.assertEquals(1, actual);
     }
+
 }

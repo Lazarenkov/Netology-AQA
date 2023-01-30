@@ -79,5 +79,4 @@ public class QueryHelper {
         Assertions.assertEquals("DECLINED", result);
     }
 
-
 }

@@ -7,7 +7,6 @@ import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class CardFormPage {
@@ -22,7 +21,6 @@ public class CardFormPage {
     private SelenideElement cvvCodeField = cardFormFields.findBy(text("CVC/CVV"));
 
     public String clearField = Keys.chord(Keys.CONTROL, "a") + Keys.DELETE;
-
 
     public CardFormPage fillAllCardFields(Dto.User user) {
         cardNumberField.find(".input__control").setValue(user.getCardNumber());
@@ -39,7 +37,6 @@ public class CardFormPage {
     }
 
     public SelenideElement getPageElement(String elementName) {
-
         switch (elementName) {
             case "cardNumberField":
                 return cardNumberField;
@@ -77,7 +74,5 @@ public class CardFormPage {
     public int getSubsNumber() {
         return $$(".input__sub").size();
     }
-
-
 
 }

@@ -73,7 +73,6 @@ public class DataHelper {
         return new Dto.Request(number, year, month, cvc, holder);
     }
 
-
     public static String getRandomChar() {
         String[] chars = {"!", "@", "#", "$", "%", "^", "&", "*", "(", ")", ".", ",", "/", ";", ":", "<", ">", "+", "|", "=", "_"};
         return chars[new Random().nextInt(chars.length - 1)];
@@ -87,7 +86,6 @@ public class DataHelper {
         String[] letters = {"А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я"};
         return letters[new Random().nextInt(letters.length - 1)];
     }
-
 
     public static int getRandomInt(int bound, int shift) {
         return new Random().nextInt(bound) + shift;
@@ -112,6 +110,5 @@ public class DataHelper {
     public static String getRandomRussianFirstName() {
         return fakerRU.name().firstName();
     }
-
 
 }
