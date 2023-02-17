@@ -1,0 +1,1 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/2idfa1m30xhyq4gx/branch/master?svg=true)](https://ci.appveyor.com/project/Lazarenkov/sql-api/branch/master)
