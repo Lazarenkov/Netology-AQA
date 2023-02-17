@@ -15,6 +15,10 @@ install:
   - sleep 10
   - java -jar ./artifacts/app-deadline.jar &
 
+test_script:
+  - sudo chmod +x gradlew
+  - ps: ./gradlew test --info
+
 build_script:
   - sleep 10
   - sudo chmod +x ./gradlew
