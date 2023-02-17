@@ -40,6 +40,16 @@ public class DataHelper {
         return amount;
     }
 
+    public static int getInvalidExceedingBalanceTransferAmount(String fromCard) {
+        return SQLHelper.getCardBalance(fromCard)/100 + new Random().nextInt(10000)+1;
+    }
+
+    public static int getInvalidNegativeTransferAmount(String fromCard) {
+        int bound = SQLHelper.getCardBalance(fromCard)/100;
+        int amount = new Random().nextInt(bound - 1) * -1;
+        return amount;
+    }
+
     public static Dto.Login getLoginDTO() {
         return new Dto.Login(getLogin(), getPassword());
     }
