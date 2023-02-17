@@ -16,5 +16,6 @@ install:
   - java -jar ./artifacts/app-deadline.jar &
 
 build_script:
+  - sleep 10
   - ./gradlew test --info
 
