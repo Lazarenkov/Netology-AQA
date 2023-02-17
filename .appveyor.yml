@@ -15,7 +15,7 @@ install:
   - ps: sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   - ps: sudo chmod +x /usr/local/bin/docker-compose
   - ps: sudo docker-compose up -d
-  - sleep 100
+  - sleep 10
   - java -jar ./artifacts/app-deadline.jar -P:jdbc.url=jdbc:mysql://localhost:3306/db -P:jdbc.user=user -P:jdbc.password=qwerty123 &
 
 test_script:
@@ -23,7 +23,7 @@ test_script:
   - ps: ./gradlew test --info
 
 build_script:
-  - sleep 100
+  - sleep 10
   - sudo chmod +x ./gradlew
   - ./gradlew test --info
 

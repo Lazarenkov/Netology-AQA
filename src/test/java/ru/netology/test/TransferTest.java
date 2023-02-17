@@ -34,12 +34,14 @@ public class TransferTest {
         int toCardBalanceProper = SQLHelper.getCardBalance(toCard);
 
         RequestHelper.sendAuthRequest();
-        RequestHelper.sendTransferRequest(fromCard, toCard, value / 100);
+        RequestHelper.sendTransferRequest(fromCard, toCard, value);
 
-        int fromCardBalanceExpected = fromCardBalanceProper - (value);
+        int fromCardBalanceExpected = fromCardBalanceProper - (value*100);
         int fromCardBalanceActual = SQLHelper.getCardBalance(fromCard);
-        int toCardBalanceExpected = toCardBalanceProper + (value);
+        int toCardBalanceExpected = toCardBalanceProper + (value*100);
         int toCardBalanceActual = SQLHelper.getCardBalance(toCard);
+
+        System.out.println("сумма="+value+"изначально на карте назначения="+toCardBalanceProper);
 
         Assertions.assertEquals(fromCardBalanceExpected, fromCardBalanceActual);
         Assertions.assertEquals(toCardBalanceExpected, toCardBalanceActual);

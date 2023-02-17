@@ -35,7 +35,7 @@ public class DataHelper {
     }
 
     public static int getValidTransferAmount(String fromCard) {
-        int bound = SQLHelper.getCardBalance(fromCard);
+        int bound = SQLHelper.getCardBalance(fromCard)/100;
         int amount = new Random().nextInt(bound - 1) + 1;
         return amount;
     }
