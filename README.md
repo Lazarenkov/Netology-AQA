@@ -1,11 +1,11 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/3bl8qh1ebv4jxcfq?svg=true)](https://ci.appveyor.com/project/Lazarenkov/selenium)
 
-# Дипломная работа по курсу "Тестировщик ПО"
+# Автоматизация тестирования веб-приложения с использованием Selenium WebDriver
 
 
 ---
 
-## [План автоматизации тестирования](https://github.com/Lazarenkov/Diploma/blob/master/Plan.md)
+## [План автоматизации тестирования](https://github.com/Lazarenkov/Selenium/blob/master/Plan.md)
 
 
 ---
@@ -14,8 +14,8 @@
 
 ---
 
-## [Отчет о тестировании](https://github.com/Lazarenkov/Diploma/blob/master/Report.md)
+## [Отчет о тестировании](https://github.com/Lazarenkov/Selenium/blob/master/Report.md)
 
 ---
 
-## [Отчет по автоматизации тестирования](https://github.com/Lazarenkov/Diploma/blob/master/Summary.md)
+## [Отчет по автоматизации тестирования](https://github.com/Lazarenkov/Selenium/blob/master/Summary.md)
