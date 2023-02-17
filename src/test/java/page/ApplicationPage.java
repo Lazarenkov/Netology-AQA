@@ -7,14 +7,13 @@ import org.openqa.selenium.WebDriver;
 public class ApplicationPage {
 
     By nameField = By.cssSelector("[data-test-id='name']");
-    By nameFieldInput = By.cssSelector("[data-test-id='name'] input");
     By phoneField = By.cssSelector("[data-test-id='phone']");
-    By phoneFieldInput = By.cssSelector("[data-test-id='phone'] input");
     By agreementCheckbox = By.cssSelector("[data-test-id='agreement']");
     By agreementInputInvalid = By.cssSelector("[data-test-id='agreement'].input_invalid");
     By continueButton = By.cssSelector("button");
     By successNotification = By.cssSelector("[data-test-id='order-success']");
     By inputSub = By.className("input__sub");
+    By input = By.cssSelector("input");
 
 
     private final WebDriver driver;
@@ -24,12 +23,12 @@ public class ApplicationPage {
     }
 
     public ApplicationPage fillNameField(String name) {
-        driver.findElement(nameFieldInput).sendKeys(name);
+        driver.findElement(nameField).findElement(input).sendKeys(name);
         return this;
     }
 
     public ApplicationPage fillPhoneField(String phone) {
-        driver.findElement(phoneFieldInput).sendKeys(phone);
+        driver.findElement(phoneField).findElement(input).sendKeys(phone);
         return this;
     }
 
@@ -60,12 +59,12 @@ public class ApplicationPage {
     }
 
     public ApplicationPage clearNameField() {
-        driver.findElement(nameFieldInput).sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);
+        driver.findElement(nameField).findElement(input).sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);
         return this;
     }
 
     public ApplicationPage clearPhoneField() {
-        driver.findElement(phoneFieldInput).sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);
+        driver.findElement(phoneField).findElement(input).sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);
         return this;
     }
 
