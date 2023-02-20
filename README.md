@@ -2,17 +2,17 @@
 
 # Автоматизация тестирования API веб-сервиса
 
-## [План автоматизации тестирования](https://github.com/Lazarenkov/Diploma/blob/master/Plan.md)
+## [План автоматизации тестирования](https://github.com/Lazarenkov/SQL-API/blob/master/docs/Plan.md)
 
 
 ---
 
-## [Инструкция по запуску тестового стенда](https://github.com/Lazarenkov/Diploma/blob/master/Lifehacks.md)
+## [Инструкция по запуску тестового стенда](https://github.com/Lazarenkov/SQL-API/blob/master/docs/Lifehacks.md)
 
 ---
 
-## [Отчет о тестировании](https://github.com/Lazarenkov/Diploma/blob/master/Report.md)
+## [Отчет о тестировании](https://github.com/Lazarenkov/SQL-API/blob/master/docs/Report.md)
 
 ---
 
-## [Отчет по автоматизации тестирования](https://github.com/Lazarenkov/Diploma/blob/master/Summary.md)
+## [Отчет по автоматизации тестирования](https://github.com/Lazarenkov/SQL-API/blob/master/docs/Summary.md)
