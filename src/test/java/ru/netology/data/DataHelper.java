@@ -34,6 +34,14 @@ public class DataHelper {
         return "5559 0000 0000 0002";
     }
 
+    public static String getUnexistingCardNumber() {
+        return faker.numerify("#### #### #### ####");
+    }
+
+    public static String getIncorrectCardNumber() {
+        return faker.numerify("####");
+    }
+
     public static int getValidTransferAmount(String fromCard) {
         int bound = SQLHelper.getCardBalance(fromCard)/100;
         int amount = new Random().nextInt(bound - 1) + 1;
@@ -47,6 +55,11 @@ public class DataHelper {
     public static int getInvalidNegativeTransferAmount(String fromCard) {
         int bound = SQLHelper.getCardBalance(fromCard)/100;
         int amount = new Random().nextInt(bound - 1) * -1;
+        return amount;
+    }
+
+    public static int getRandomTransferAmount() {
+        int amount = new Random().nextInt(10000 - 1) * -1;
         return amount;
     }
 
